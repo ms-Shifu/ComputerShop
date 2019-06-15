@@ -2,9 +2,9 @@ package com.sivak.computershop.repos;
 
 import com.sivak.computershop.entities.Laptops;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
-public interface LaptopsRepo extends JpaRepository {
+public interface LaptopsRepo extends JpaRepository<Laptops, Long> {
+
     Iterable<Laptops> findByManufacturer(String manufacturer);
     Iterable<Laptops> findByModel(String name);
     Iterable<Laptops> findByMonitor(int monitor);

@@ -22,12 +22,11 @@ public class IndexController {
 //    private LaptopsRepo laptopsRepo;
 
     private final LaptopsRepo laptopsRepo;
-
     public IndexController(LaptopsRepo laptopsRepo) {
         this.laptopsRepo = laptopsRepo;
     }
 
-    @Value("${upload.path")
+    @Value("${upload.path}")
     private String uploadPath;
 
     @GetMapping("/")
@@ -65,13 +64,13 @@ public class IndexController {
         }
 
         String uuidName = UUID.randomUUID().toString();
-        String resultFileName = file.getOriginalFilename() + "." + uuidName;
+        String resultFileName = uuidName + "." + file.getOriginalFilename();
         laptop.setFileName(resultFileName);
 
         file.transferTo(new File(uploadPath + "/" + resultFileName));
 
         laptopsRepo.save(laptop);
 
-        return "/laptopEdit";
+        return "/laptopsEdit";
     }
 }

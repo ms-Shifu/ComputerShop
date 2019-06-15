@@ -1,6 +1,6 @@
 <main>
     <div class="container">
-        <form method="post" action="/" enctype="multipart/form-data">
+        <form method="post" action="/laptopsEdit" enctype="multipart/form-data" autocomplete="on">
             <div class="form-group">
                 <#--<label for="input1">Manufacturer</label>-->
                 <input type="text" name="manufacturer" class="form-control" id="input1" placeholder="Enter Manufacturer">
@@ -11,7 +11,7 @@
             </div>
            <div class="form-group">
                 <#--<label for="input3">Monitor</label>-->
-                <input type="number" name="monitor" class="form-control" id="input3" placeholder="Enter Monitor">
+                <input type="number" name="monitor" class="form-control" id="input3" placeholder="Enter Monitor, inch">
             </div>
            <div class="form-group">
                 <#--<label for="input4">CPU</label>-->
@@ -19,7 +19,7 @@
             </div>
            <div class="form-group">
                 <#--<label for="input5">RAM</label>-->
-                <input type="number" name="ram" class="form-control" id="input5" placeholder="Enter RAM">
+                <input type="number" name="ram" class="form-control" id="input5" placeholder="Enter RAM, Gb">
             </div>
            <div class="form-group">
                 <#--<label for="input6">Storage Type</label>-->
@@ -27,7 +27,7 @@
             </div>
            <div class="form-group">
                 <#--<label for="input7">Storage Size</label>-->
-                <input type="number" name="storageSize" class="form-control" id="input7" placeholder="Enter Storage Size">
+                <input type="number" name="storageSize" class="form-control" id="input7" placeholder="Enter Storage Size, Gb">
             </div>
            <div class="form-group">
                 <#--<label for="input8">Video Card</label>-->
