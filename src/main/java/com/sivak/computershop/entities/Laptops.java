@@ -21,6 +21,9 @@ public class Laptops {
 
     private String fileName;
 
+    public Laptops() {
+    }
+
     public Laptops(String manufacturer, String model, int monitor, String cpu, int ram, String storageType, int storageSize, String videoCard) {
         this.model = model;
         this.manufacturer = manufacturer;

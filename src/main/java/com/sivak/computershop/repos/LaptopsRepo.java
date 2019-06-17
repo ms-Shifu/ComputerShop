@@ -3,14 +3,16 @@ package com.sivak.computershop.repos;
 import com.sivak.computershop.entities.Laptops;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface LaptopsRepo extends JpaRepository<Laptops, Long> {
 
-    Iterable<Laptops> findByManufacturer(String manufacturer);
-    Iterable<Laptops> findByModel(String name);
-    Iterable<Laptops> findByMonitor(int monitor);
-    Iterable<Laptops> findByCpu(String cpu);
-    Iterable<Laptops> findByRam(int ram);
-    Iterable<Laptops> findByStorageType(String storageType);
-    Iterable<Laptops> findByStorageSize(int storageSize);
-    Iterable<Laptops> findByVideoCard(String videoCard);
+    List<Laptops> findByManufacturer(String manufacturer);
+    List<Laptops> findByModel(String name);
+    List<Laptops> findByMonitor(Integer monitor);
+    List<Laptops> findByCpu(String cpu);
+    List<Laptops> findByRam(Integer ram);
+    List<Laptops> findByStorageType(String storageType);
+    List<Laptops> findByStorageSize(Integer storageSize);
+    List<Laptops> findByVideoCard(String videoCard);
 }

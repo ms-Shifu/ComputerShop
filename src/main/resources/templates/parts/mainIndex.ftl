@@ -1,4 +1,5 @@
 <#import "filters.ftl" as f>
+<#import "sectionIndex.ftl" as s>
 
 <main class="mb-5">
     <div class="container">
@@ -9,19 +10,14 @@
 
     <#--SIDEBAR-->
         <div class="row">
-            <div class="col-lg-3 border-right">
-                <@f.filters "/"/>
+            <div class="col-3 border-right">
+                <@f.filters "/filter"/>
             </div>
 
             <#--SECTION-->
 
-            <div class="col-lg-9">
-                Content
-                <div class="row">
-                    <div class="col-4">Lorem ipsum dolor sit amet.</div>
-                    <div class="col-4">Lorem ipsum dolor sit amet.</div>
-                    <div class="col-4">Lorem ipsum dolor sit amet.</div>
-                </div>
+            <div class="col-9">
+                <@s.sectionIndex></@s.sectionIndex>
             </div>
         </div>
 
