@@ -16,7 +16,7 @@ public class Laptops {
     private String cpu;
     private int ram;
     private String storageType;
-    private int storageSize;
+    private Integer storageSize;
     private String videoCard;
 
     private String fileName;
@@ -25,8 +25,8 @@ public class Laptops {
     }
 
     public Laptops(String manufacturer, String model, int monitor, String cpu, int ram, String storageType, int storageSize, String videoCard) {
-        this.model = model;
         this.manufacturer = manufacturer;
+        this.model = model;
         this.monitor = monitor;
         this.cpu = cpu;
         this.ram = ram;

@@ -4,26 +4,28 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta model="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>CS</title>
 
-    <#--<style>-->
-       <#--footer {-->
-           <#--position: absolute;-->
-           <#--bottom: 0;-->
-       <#--}-->
-    <#--</style>-->
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+    </style>
 
 </head>
-<body>
+
+<body class="d-flex flex-column">
     <#include "navbar.ftl">
 
-
-<#nested >
+<div class="flex-grow-1">
+    <#nested >
+</div>
 
 
     <#include "footer.ftl">

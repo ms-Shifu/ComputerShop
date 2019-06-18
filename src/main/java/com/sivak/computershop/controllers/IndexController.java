@@ -2,7 +2,6 @@ package com.sivak.computershop.controllers;
 
 import com.sivak.computershop.entities.Laptops;
 import com.sivak.computershop.repos.LaptopsRepo;
-import org.jboss.jandex.Index;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -33,58 +32,6 @@ public class IndexController {
     private String uploadPath;
 
     @GetMapping("/")
-    public String index(
-            @RequestParam (required = false, defaultValue = "") List<String> monitor,
-            Model model) {
-
-
-
-        List<Laptops> laptops = laptopsRepo.findAll();
-        model.addAttribute("laptops", laptops);
-
-        return "index";
-    }
-
-    @GetMapping("/laptopsEdit")
-    public String laptopEdit(Model model) {
-
-        return "laptopsEdit";
-    }
-
-    @PostMapping("/laptopsEdit")
-    public String addLaptop(Model model2,
-                            @RequestParam String manufacturer,
-                            @RequestParam String model,
-                            @RequestParam int monitor,
-                            @RequestParam String cpu,
-                            @RequestParam int ram,
-                            @RequestParam String storageType,
-                            @RequestParam int storageSize,
-                            @RequestParam String videoCard,
-                            @RequestParam("file")MultipartFile file
-                            ) throws IOException {
-
-        Laptops laptop = new Laptops(manufacturer,model, monitor, cpu, ram, storageType,
-                storageSize, videoCard);
-
-        File uploadsFile = new File(uploadPath);
-
-        if (!uploadsFile.exists()) {
-            uploadsFile.mkdir();
-        }
-
-        String uuidName = UUID.randomUUID().toString();
-        String resultFileName = uuidName + "." + file.getOriginalFilename();
-        laptop.setFileName(resultFileName);
-
-        file.transferTo(new File(uploadPath + "/" + resultFileName));
-
-        laptopsRepo.save(laptop);
-
-        return "/laptopsEdit";
-    }
-
-    @PostMapping("/filter")
     public String filter(
             @RequestParam(required = false) List<Integer> monitor,
             @RequestParam(required = false) String manufacturer,
@@ -159,6 +106,11 @@ public class IndexController {
                     for (Integer r : ram) {
                         laptops.addAll(laptopsRepo.findByRam(r));
                     }
+
+                    if (laptops.isEmpty()) {
+                        model.addAttribute("laptops", laptops);
+                        return "index";
+                    }
                 } else {
 
                     List<Laptops> laptopsEmpty = new ArrayList<>();
@@ -185,6 +137,11 @@ public class IndexController {
                 if (laptops.isEmpty()) {
                     for (String s : storageType) {
                         laptops.addAll(laptopsRepo.findByStorageType(s));
+                    }
+
+                    if (laptops.isEmpty()) {
+                        model.addAttribute("laptops", laptops);
+                        return "index";
                     }
                 } else {
 
@@ -245,6 +202,11 @@ public class IndexController {
                     for (String v : videoCard) {
                         laptops.addAll(laptopsRepo.findByVideoCard(v));
                     }
+
+                    if (laptops.isEmpty()) {
+                        model.addAttribute("laptops", laptops);
+                        return "index";
+                    }
                 } else {
 
                     List<Laptops> laptopsEmpty = new ArrayList<>();
@@ -273,6 +235,87 @@ public class IndexController {
 
         return "index";
     }
+
+
+    @GetMapping("/laptopsEdit")
+    public String laptopEdit(Model model) {
+
+        List<Laptops> laptops = laptopsRepo.findAll();
+        model.addAttribute("laptops", laptops);
+
+        return "laptopsEdit";
+    }
+
+    @PostMapping("/laptopsEditAdd")
+    public String addLaptop(Model model2,
+                            @RequestParam String manufacturer,
+                            @RequestParam String model,
+                            @RequestParam int monitor,
+                            @RequestParam String cpu,
+                            @RequestParam int ram,
+                            @RequestParam String storageType,
+                            @RequestParam int storageSize,
+                            @RequestParam String videoCard,
+                            @RequestParam("file")MultipartFile file
+    ) throws IOException {
+
+        Laptops laptop = new Laptops(manufacturer,model, monitor, cpu, ram, storageType,
+                storageSize, videoCard);
+
+        File uploadsFile = new File(uploadPath);
+
+        if (!uploadsFile.exists()) {
+            uploadsFile.mkdir();
+        }
+
+        String uuidName = UUID.randomUUID().toString();
+        String resultFileName = uuidName + "." + file.getOriginalFilename();
+        laptop.setFileName(resultFileName);
+
+        file.transferTo(new File(uploadPath + "/" + resultFileName));
+
+        laptopsRepo.save(laptop);
+
+        return "redirect:/laptopsEdit";
+    }
+
+    @PostMapping("/laptopsEditDelete")
+    public String laptopsEditDelete(@RequestParam("id") Laptops laptop,
+                                    @RequestParam String buttonEdit,
+                                    @RequestParam String manufacturer,
+                                    @RequestParam String model,
+                                    @RequestParam int monitor,
+                                    @RequestParam String cpu,
+                                    @RequestParam int ram,
+                                    @RequestParam String storageType,
+                                    @RequestParam int storageSize,
+                                    @RequestParam String videoCard
+    ) {
+
+        if (buttonEdit.equals("edit")) {
+            laptop.setManufacturer(manufacturer);
+            laptop.setModel(model);
+            laptop.setMonitor(monitor);
+            laptop.setCpu(cpu);
+            laptop.setRam(ram);
+            laptop.setStorageType(storageType);
+            laptop.setStorageSize(storageSize);
+            laptop.setVideoCard(videoCard);
+
+            laptopsRepo.save(laptop);
+        } else {
+            laptopsRepo.delete(laptop);
+        }
+
+        return "redirect:/laptopsEdit";
+    }
+
+
+    @GetMapping("/indexAdmin")
+    public String indexAdmin() {
+
+        return "redirect:/";
+    }
 }
 
-//public class
+

@@ -1,5 +1,5 @@
 <#macro filters path>
-<form method="post" action="${path}">
+<form method="get" action="${path}">
 
 <#--MONITORS-->
 
@@ -131,7 +131,7 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary mx-auto d-block">Submit</button>
+    <button type="submit" class="btn btn-primary mx-auto d-block">Find</button>
     <input type="hidden" name="_csrf" value="${_csrf.token}">
 </form>
 </#macro>
