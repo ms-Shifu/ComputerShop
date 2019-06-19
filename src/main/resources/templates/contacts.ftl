@@ -5,7 +5,12 @@
     <div class="container">
         <div class="row">
 
-            <h4 class="mx-auto mt-5">Contacts</h4>
+            <div class="mx-auto my-3">
+                <h4>Contacts</h4>
+            </div>
+
+            <#--<h4 class="mx-auto d-block">Contacts</h4>-->
+
 
             <table class="table">
                 <thead>
@@ -19,11 +24,30 @@
                 <tr>
                     <td>MTC (33), file :) (25), Velcom (29) 555-66-77</td>
                     <td><a href="https://mail.google.com/mail/u/1/#inbox">computershop@gmail.com</a> </td>
-                    <td>РБ, Минск, пр-т Победителей 111/2, 3 этаж, павельон 4</td>
+                    <td>РБ, Минск, пр-т Независимости 2-3, 2 этаж, павельон 4</td>
                 </tr>
                 </tbody>
             </table>
+
+            <div id="map" class="mb-5">
+
+            </div>
+
         </div>
     </div>
+
+  <script>
+      // Initialize and add the map
+      function initMap() {
+          var uluru = {lat: 53.8952497, lng: 27.5475775};
+          var map = new google.maps.Map(
+                  document.getElementById('map'), {zoom: 15, center: uluru});
+          var marker = new google.maps.Marker({position: uluru, map: map});
+      }
+  </script>
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9F4NO2khgGWgA8NU_BD67QUUDu6G30lE&callback=initMap">
+    </script>
 
 </@c.page>

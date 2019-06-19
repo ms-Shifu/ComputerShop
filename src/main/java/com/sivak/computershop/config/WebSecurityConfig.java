@@ -18,8 +18,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     .antMatchers("/", "/laptopsEdit", "/img/**", "/laptopsEditAdd",
-                            "/laptopsEditDelete", "/tabletsIndex", "/contacts",
-                            "https://mail.google.com/mail/u/1/#inbox").permitAll()
+                            "/laptopsEditDelete", "/tabletsIndex", "/contacts").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
