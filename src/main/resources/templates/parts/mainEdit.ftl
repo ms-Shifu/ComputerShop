@@ -14,35 +14,35 @@
                 <form method="post" action="/laptopsEditAdd" enctype="multipart/form-data" autocomplete="on">
                     <div class="form-group">
                     <#--<label for="input1">Manufacturer</label>-->
-                        <input type="text" name="manufacturer" class="form-control" id="input1" placeholder="Enter Manufacturer">
+                        <input type="text" name="manufacturer" class="form-control" id="input1" placeholder="Enter Manufacturer" required maxlength="50">
                     </div>
                     <div class="form-group">
                     <#--<label for="input2">Model</label>-->
-                        <input type="text" name="model" class="form-control" id="input2" placeholder="Enter Model">
+                        <input type="text" name="model" class="form-control" id="input2" placeholder="Enter Model" required maxlength="50">
                     </div>
                     <div class="form-group">
                     <#--<label for="input3">Monitor</label>-->
-                        <input type="number" name="monitor" class="form-control" id="input3" placeholder="Enter Monitor, inch">
+                        <input type="number" name="monitor" class="form-control" id="input3" placeholder="Enter Monitor, inch" required min="7" max="19">
                     </div>
                     <div class="form-group">
                     <#--<label for="input4">CPU</label>-->
-                        <input type="text" name="cpu" class="form-control" id="input4" placeholder="Enter CPU">
+                        <input type="text" name="cpu" class="form-control" id="input4" placeholder="Enter CPU" required maxlength="50">
                     </div>
                     <div class="form-group">
                     <#--<label for="input5">RAM</label>-->
-                        <input type="number" name="ram" class="form-control" id="input5" placeholder="Enter RAM, Gb">
+                        <input type="number" name="ram" class="form-control" id="input5" placeholder="Enter RAM, Gb" required min="1" max="999">
                     </div>
                     <div class="form-group">
                     <#--<label for="input6">Storage Type</label>-->
-                        <input type="text" name="storageType" class="form-control" id="input6" placeholder="Enter Storage Type">
+                        <input type="text" name="storageType" class="form-control" id="input6" placeholder="Enter Storage Type" required maxlength="50">
                     </div>
                     <div class="form-group">
                     <#--<label for="input7">Storage Size</label>-->
-                        <input type="number" name="storageSize" class="form-control" id="input7" placeholder="Enter Storage Size, Gb">
+                        <input type="number" name="storageSize" class="form-control" id="input7" placeholder="Enter Storage Size, Gb" required min="100" max="99999">
                     </div>
                     <div class="form-group">
                     <#--<label for="input8">Video Card</label>-->
-                        <input type="text" name="videoCard" class="form-control" id="input8" placeholder="Enter Video Card">
+                        <input type="text" name="videoCard" class="form-control" id="input8" placeholder="Enter Video Card" required maxlength="50">
                     </div>
 
                     <div class="form-group">
@@ -85,42 +85,42 @@
                     <div class="col-1">
                         <label class="sr-only" for="inlineFormInput1">manufacturer</label>
                         <input type="text" class="form-control mb-2" id="inlineFormInput1"
-                               name="manufacturer" value="${laptop.manufacturer}">
+                               name="manufacturer" value="${laptop.manufacturer?capitalize}" maxlength="50">
                     </div>
                     <div class="col-3">
                         <label class="sr-only" for="inlineFormInput2">model</label>
                         <input type="text" class="form-control mb-2" id="inlineFormInput2"
-                               name="model" value="${laptop.model}">
+                               name="model" value="${laptop.model}" maxlength="50">
                     </div>
                      <div class="col-1">
                         <label class="sr-only" for="inlineFormInput3">monitor</label>
                         <input type="number" class="form-control mb-2" id="inlineFormInput3"
-                               name="monitor" value="${laptop.monitor}">
+                               name="monitor" value="${laptop.monitor}" min="7" max="19">
                     </div>
                      <div class="col-2">
                         <label class="sr-only" for="inlineFormInput4">cpu</label>
                         <input type="text" class="form-control mb-2" id="inlineFormInput4"
-                               name="cpu" value="${laptop.cpu}">
+                               name="cpu" value="${laptop.cpu}" maxlength="50">
                     </div>
                      <div class="col-1">
                         <label class="sr-only" for="inlineFormInput5">ram</label>
                         <input type="number" class="form-control mb-2" id="inlineFormInput5"
-                               name="ram" value="${laptop.ram}">
+                               name="ram" value="${laptop.ram}" min="1" max="999">
                     </div>
                      <div class="col-1">
                         <label class="sr-only" for="inlineFormInput6">storageType</label>
                         <input type="text" class="form-control mb-2" id="inlineFormInput6"
-                               name="storageType" value="${laptop.storageType}">
+                               name="storageType" value="${laptop.storageType}" maxlength="50">
                     </div>
                     <div class="col-1">
                         <label class="sr-only" for="inlineFormInput7">storageSize</label>
                         <input type="number" class="form-control mb-2" id="inlineFormInput7"
-                               name="storageSize" value="${laptop.storageSize?c}">
+                               name="storageSize" value="${laptop.storageSize?c}" min="100" max="99999">
                     </div>
                     <div class="col-2">
                         <label class="sr-only" for="inlineFormInput8">videoCard</label>
                         <input type="text" class="form-control mb-2" id="inlineFormInput8"
-                               name="videoCard" value="${laptop.videoCard}">
+                               name="videoCard" value="${laptop.videoCard}" maxlength="50">
                     </div>
 
                     <div class="form-row ml-auto">

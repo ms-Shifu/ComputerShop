@@ -1,12 +1,12 @@
 <#macro filters path>
-<form method="get" action="${path}">
+<form method="get" action="${path}" autocomplete="on">
 
 <#--MONITORS-->
 
     <span class="font-weight-bolder" style="font-size: 0.95rem;">Monitor</span>
     <div class="form-group">
         <div class="custom-control custom-checkbox">
-            <input type="checkbox" name="monitor" value="13" class="custom-control-input" id="customCheck1">
+            <input type="checkbox" name="monitor" value="13" class="custom-control-input" id="customCheck1" autocomplete="on">
             <label class="custom-control-label" for="customCheck1">13"</label>
         </div>
         <div class="custom-control custom-checkbox">

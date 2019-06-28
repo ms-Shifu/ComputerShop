@@ -2,9 +2,6 @@
 
 <@c.page>
 
-
     <#include "parts/mainIndex.ftl">
-
-
 
 </@c.page>

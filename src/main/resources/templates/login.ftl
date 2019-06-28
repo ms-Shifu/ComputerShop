@@ -8,8 +8,8 @@
         <p class="h4 mb-4">Sign In</p>
 
         <div class="">
-            <input type="text" name="username" id="defaultLoginFormEmail" class="form-control mb-4 col-4 mx-auto" placeholder="Username" autofocus>
-            <input type="password" name="password" id="defaultLoginFormPassword" class="form-control mb-4 col-4 mx-auto" placeholder="Password">
+            <input type="text" name="username" id="defaultLoginFormEmail" class="form-control mb-4 col-4 mx-auto" placeholder="Username" autofocus required>
+            <input type="password" name="password" id="defaultLoginFormPassword" class="form-control mb-4 col-4 mx-auto" placeholder="Password" required>
             <button class="btn btn-info btn-block my-4 col-4 mx-auto" type="submit">Sign In</button>
             <input type="hidden" name="_csrf" value="${_csrf.token}">
         </div>

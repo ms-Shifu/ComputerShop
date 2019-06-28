@@ -9,7 +9,6 @@
                         <h5 class="card-title text-center">${laptop.manufacturer} ${laptop.model}</h5>
                         <p class="card-text text-center">${laptop.monitor}", ${laptop.cpu}, ${laptop.ram}Gb,
                            ${laptop.storageType}, ${laptop.storageSize}Gb, video card: ${laptop.videoCard}.</p>
-                    <#--<a href="#" class="btn btn-primary">Go somewhere</a>-->
                     </div>
                 </div>
             </div>

@@ -25,7 +25,7 @@ public class Laptops {
     }
 
     public Laptops(String manufacturer, String model, int monitor, String cpu, int ram, String storageType, int storageSize, String videoCard) {
-        this.manufacturer = manufacturer;
+        this.manufacturer = manufacturer.toUpperCase();
         this.model = model;
         this.monitor = monitor;
         this.cpu = cpu;
@@ -56,7 +56,7 @@ public class Laptops {
     }
 
     public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
+        this.manufacturer = manufacturer.toUpperCase();
     }
 
     public int getMonitor() {

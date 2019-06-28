@@ -67,10 +67,10 @@ public class IndexController {
             if (manufacturer != null) {
 
                 if (laptops.isEmpty()) {
-                    laptops.addAll(laptopsRepo.findByManufacturer(manufacturer));
+                    laptops.addAll(laptopsRepo.findByManufacturer(manufacturer.toUpperCase()));
                 } else {
                     laptops = laptops.stream()
-                            .filter(l->l.getManufacturer().equals(manufacturer))
+                            .filter(l->l.getManufacturer().equals(manufacturer.toUpperCase()))
                             .collect(Collectors.toList());
                 }
 
