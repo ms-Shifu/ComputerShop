@@ -87,7 +87,7 @@
                         <input type="text" class="form-control mb-2" id="inlineFormInput1"
                                name="manufacturer" value="${laptop.manufacturer?capitalize}" maxlength="50">
                     </div>
-                    <div class="col-3">
+                    <div class="col-2">
                         <label class="sr-only" for="inlineFormInput2">model</label>
                         <input type="text" class="form-control mb-2" id="inlineFormInput2"
                                name="model" value="${laptop.model}" maxlength="50">
@@ -122,6 +122,12 @@
                         <input type="text" class="form-control mb-2" id="inlineFormInput8"
                                name="videoCard" value="${laptop.videoCard}" maxlength="50">
                     </div>
+                    <div class="col-1">
+                        <label class="sr-only" for="inlineFormInput9">videoCard</label>
+                        <input type="number" class="form-control mb-2" id="inlineFormInput9"
+                               name="price" value="${laptop.getPrice()?c}" min="0.00" max="99999.99" step="0.01">
+                    </div>
+
 
                     <div class="form-row ml-auto">
                         <div class="col-auto">

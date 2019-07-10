@@ -40,12 +40,14 @@ public class IndexController {
             @RequestParam(required = false) List<String> storageType,
             @RequestParam(required = false) List<Integer> storageSize,
             @RequestParam(required = false) List<String> videoCard,
+            @RequestParam(required = false, defaultValue = "0") double price1,
+            @RequestParam(required = false, defaultValue = "99999") double price2,
             Model model) {
 
         List<Laptops> laptops = new ArrayList<>();
 
         if (monitor != null || manufacturer != null || cpu != null || ram != null || storageType != null ||
-                storageSize != null || videoCard != null) {
+                storageSize != null || videoCard != null || price1 != 0 || price2 != 0) {
 
 //            List<Laptops> laptopsEmpty = new ArrayList<>();
 
@@ -226,6 +228,24 @@ public class IndexController {
                 }
             }
 
+//----------PRICE
+
+            if (price1 != 0 || price2 != 0) {
+
+                if (laptops.isEmpty()) {
+                    laptops.addAll(laptopsRepo.findByPriceBetween(price1, price2));
+                } else {
+                    laptops = laptops.stream()
+                            .filter(p->(p.getPrice() >= price1 && p.getPrice() <= price2))
+                            .collect(Collectors.toList());
+                }
+
+                if (laptops.isEmpty()) {
+                    model.addAttribute("laptops", laptops);
+                    return "index";
+                }
+            }
+
         } else {
             laptops = laptopsRepo.findAll();
         }
@@ -256,11 +276,12 @@ public class IndexController {
                             @RequestParam String storageType,
                             @RequestParam int storageSize,
                             @RequestParam String videoCard,
-                            @RequestParam("file")MultipartFile file
+                            @RequestParam("file")MultipartFile file,
+                            @RequestParam double price
     ) throws IOException {
 
-        Laptops laptop = new Laptops(manufacturer,model, monitor, cpu, ram, storageType,
-                storageSize, videoCard);
+        Laptops laptop = new Laptops(manufacturer, model, monitor, cpu, ram, storageType,
+                storageSize, videoCard, price);
 
         File uploadsFile = new File(uploadPath);
 
@@ -289,7 +310,8 @@ public class IndexController {
                                     @RequestParam int ram,
                                     @RequestParam String storageType,
                                     @RequestParam int storageSize,
-                                    @RequestParam String videoCard
+                                    @RequestParam String videoCard,
+                                    @RequestParam double price
     ) {
 
         if (buttonEdit.equals("edit")) {
@@ -301,6 +323,7 @@ public class IndexController {
             laptop.setStorageType(storageType);
             laptop.setStorageSize(storageSize);
             laptop.setVideoCard(videoCard);
+            laptop.setPrice(price);
 
             laptopsRepo.save(laptop);
         } else {

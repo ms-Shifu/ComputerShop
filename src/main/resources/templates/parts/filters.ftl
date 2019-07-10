@@ -1,12 +1,12 @@
 <#macro filters path>
-<form method="get" action="${path}" autocomplete="on">
+<form method="get" action="${path}">
 
 <#--MONITORS-->
 
     <span class="font-weight-bolder" style="font-size: 0.95rem;">Monitor</span>
     <div class="form-group">
         <div class="custom-control custom-checkbox">
-            <input type="checkbox" name="monitor" value="13" class="custom-control-input" id="customCheck1" autocomplete="on">
+            <input type="checkbox" name="monitor" value="13" class="custom-control-input" id="customCheck1" >
             <label class="custom-control-label" for="customCheck1">13"</label>
         </div>
         <div class="custom-control custom-checkbox">
@@ -128,6 +128,18 @@
         <div class="custom-control custom-checkbox">
             <input type="checkbox" name="videoCard" value="Intel HD Graphics" class="custom-control-input" id="customCheck17">
             <label class="custom-control-label" for="customCheck17">Intel HD Graphics</label>
+        </div>
+    </div>
+
+    <#--Price-->
+
+    <span class="font-weight-bolder" style="font-size: 0.95rem;">Price</span>
+    <div class="form-row form-group">
+        <div class="col">
+            <input type="number" name="price1" class="form-control" placeholder="from">
+        </div>
+        <div class="col">
+            <input type="number" name="price2" class="form-control" placeholder="to">
         </div>
     </div>
 

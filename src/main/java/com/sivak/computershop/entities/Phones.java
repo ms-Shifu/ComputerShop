@@ -6,11 +6,11 @@
 //import javax.persistence.Id;
 //
 //@Entity
-//public class Tablets {
+//public class Phones {
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
 //    private Long id;
-//    private String OSystem;
+//    private boolean dualSim;
 //    private String manufacturer;
 //    private String model;
 //    private int monitor;
@@ -22,13 +22,12 @@
 //    private String fileName;
 //    private int price;
 //
-//
-//    public Tablets() {
+//    public Phones() {
 //    }
 //
-//    public Tablets(String OSystem, String manufacturer, String model, int monitor, String cpu, int ram,
-//                   boolean flashCard, Integer storageSize, String videoCard, int price) {
-//        this.OSystem = OSystem;
+//    public Phones(boolean dualSim, String manufacturer, String model, int monitor, String cpu,
+//                  int ram, boolean flashCard, Integer storageSize, String videoCard, int price) {
+//        this.dualSim = dualSim;
 //        this.manufacturer = manufacturer;
 //        this.model = model;
 //        this.monitor = monitor;
@@ -48,12 +47,12 @@
 //        this.id = id;
 //    }
 //
-//    public String getOSystem() {
-//        return OSystem;
+//    public boolean isDualSim() {
+//        return dualSim;
 //    }
 //
-//    public void setOSystem(String OSystem) {
-//        this.OSystem = OSystem;
+//    public void setDualSim(boolean dualSim) {
+//        this.dualSim = dualSim;
 //    }
 //
 //    public String getManufacturer() {

@@ -1,9 +1,6 @@
 package com.sivak.computershop.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Laptops {
@@ -18,14 +15,18 @@ public class Laptops {
     private String storageType;
     private Integer storageSize;
     private String videoCard;
-
     private String fileName;
+    @Column(precision = 2)
+    private double price;
+
 
     public Laptops() {
     }
 
-    public Laptops(String manufacturer, String model, int monitor, String cpu, int ram, String storageType, int storageSize, String videoCard) {
-        this.manufacturer = manufacturer.toUpperCase();
+    public Laptops(String manufacturer, String model, int monitor, String cpu, int ram,
+                   String storageType, Integer storageSize, String videoCard,
+                   double price) {
+        this.manufacturer = manufacturer;
         this.model = model;
         this.monitor = monitor;
         this.cpu = cpu;
@@ -33,6 +34,7 @@ public class Laptops {
         this.storageType = storageType;
         this.storageSize = storageSize;
         this.videoCard = videoCard;
+        this.price = price;
     }
 
     public Long getId() {
@@ -113,5 +115,20 @@ public class Laptops {
 
     public void setVideoCard(String videoCard) {
         this.videoCard = videoCard;
+    }
+
+    public void setStorageSize(Integer storageSize) {
+        this.storageSize = storageSize;
+    }
+
+//    @Type(type="double")
+    public Double getPrice() {
+//        return  this.price == null ? .0 : price;
+        return price;
+    }
+
+//    @Type(type="double")
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

@@ -21,7 +21,7 @@
             <#include "logout.ftl">
 
         <#else >
-            <a class="btn btn-primary" href="/indexAdmin" role="button">Loq In</a>
+            <a class="btn btn-primary" href="/indexAdmin" role="button">Log In</a>
 
         </#if>
 

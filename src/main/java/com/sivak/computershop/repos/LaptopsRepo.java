@@ -15,4 +15,7 @@ public interface LaptopsRepo extends JpaRepository<Laptops, Long> {
     List<Laptops> findByStorageType(String storageType);
     List<Laptops> findByStorageSize(Integer storageSize);
     List<Laptops> findByVideoCard(String videoCard);
+
+    List<Laptops> findByPriceBetween(double price1, double price2);
+    List<Laptops> findByPrice(double price1);
 }
