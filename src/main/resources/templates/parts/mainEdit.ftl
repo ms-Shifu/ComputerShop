@@ -1,10 +1,9 @@
-<main>
-    <div class="container">
+<main class="container">
 
         <#--ADD FORM-->
 
         <div class="mb-4">
-            <h4 class="text-primary mb-4">Add new laptop</h4>
+            <h4 class="text-secondary mb-4">Add new laptop</h4>
 
             <a class="btn btn-primary" data-toggle="collapse" href="#collapseAddNewLaptop" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Press to open
@@ -44,6 +43,11 @@
                     <#--<label for="input8">Video Card</label>-->
                         <input type="text" name="videoCard" class="form-control" id="input8" placeholder="Enter Video Card" required maxlength="50">
                     </div>
+                     <div class="form-group">
+                    <#--<label for="input9">Price</label>-->
+                        <input type="number" name="price" class="form-control" id="input9" placeholder="Price" required min="0.01" max="99999.99" step="0.01">
+                    </div>
+
 
                     <div class="form-group">
                         <div class="custom-file">
@@ -62,7 +66,7 @@
         <#--EDIT AND DELITE FORM-->
 
         <div class="my-5">
-            <h4 class="text-primary ">Settings</h4>
+            <h4 class="text-secondary ">Settings</h4>
             <table class="mt-4 table">
                 <thead>
                 <tr class="row">
@@ -117,15 +121,15 @@
                         <input type="number" class="form-control mb-2" id="inlineFormInput7"
                                name="storageSize" value="${laptop.storageSize?c}" min="100" max="99999">
                     </div>
-                    <div class="col-2">
+                    <div style="width: 150px;">
                         <label class="sr-only" for="inlineFormInput8">videoCard</label>
                         <input type="text" class="form-control mb-2" id="inlineFormInput8"
                                name="videoCard" value="${laptop.videoCard}" maxlength="50">
                     </div>
-                    <div class="col-1">
+                    <div class="ml-1" style="width: 125px;">
                         <label class="sr-only" for="inlineFormInput9">videoCard</label>
                         <input type="number" class="form-control mb-2" id="inlineFormInput9"
-                               name="price" value="${laptop.getPrice()?c}" min="0.00" max="99999.99" step="0.01">
+                               name="price" value="${laptop.getPrice()?c}" min="0.01" max="99999.99" step="0.01">
                     </div>
 
 
@@ -143,8 +147,4 @@
             </#list>
         </div>
 
-
-
-
-    </div>
 </main>

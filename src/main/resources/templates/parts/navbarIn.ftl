@@ -17,7 +17,7 @@
                     </#if>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/tabletsIndex">Tablets</a>
+                    <a class="nav-link" href="/tablets">Tablets</a>
                 </li>
             </ul>
         </div>

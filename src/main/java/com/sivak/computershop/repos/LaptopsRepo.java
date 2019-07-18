@@ -18,4 +18,5 @@ public interface LaptopsRepo extends JpaRepository<Laptops, Long> {
 
     List<Laptops> findByPriceBetween(double price1, double price2);
     List<Laptops> findByPrice(double price1);
+
 }

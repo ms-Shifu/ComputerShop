@@ -1,9 +1,12 @@
 package com.sivak.computershop.controllers;
 
 import com.sivak.computershop.entities.Laptops;
+import com.sivak.computershop.entities.Users;
 import com.sivak.computershop.repos.LaptopsRepo;
+import com.sivak.computershop.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,10 +26,8 @@ public class IndexController {
     @Autowired
     private LaptopsRepo laptopsRepo;
 
-//    private final LaptopsRepo laptopsRepo;
-//    public IndexController(LaptopsRepo laptopsRepo) {
-//        this.laptopsRepo = laptopsRepo;
-//    }
+    @Autowired
+    private UserRepo userRepo;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -40,8 +41,8 @@ public class IndexController {
             @RequestParam(required = false) List<String> storageType,
             @RequestParam(required = false) List<Integer> storageSize,
             @RequestParam(required = false) List<String> videoCard,
-            @RequestParam(required = false, defaultValue = "0") double price1,
-            @RequestParam(required = false, defaultValue = "99999") double price2,
+            @RequestParam(required = false, defaultValue = "0.01") double price1,
+            @RequestParam(required = false, defaultValue = "99999.99") double price2,
             Model model) {
 
         List<Laptops> laptops = new ArrayList<>();
@@ -276,8 +277,8 @@ public class IndexController {
                             @RequestParam String storageType,
                             @RequestParam int storageSize,
                             @RequestParam String videoCard,
-                            @RequestParam("file")MultipartFile file,
-                            @RequestParam double price
+                            @RequestParam double price,
+                            @RequestParam("file")MultipartFile file
     ) throws IOException {
 
         Laptops laptop = new Laptops(manufacturer, model, monitor, cpu, ram, storageType,
@@ -336,6 +337,21 @@ public class IndexController {
 
     @GetMapping("/indexAdmin")
     public String indexAdmin() {
+
+        return "redirect:/";
+    }
+
+
+
+    @PostMapping("/addToCart")
+    public String addToCart(
+            @AuthenticationPrincipal Users user,
+            @RequestParam("buttonAddToCart") Laptops laptop,
+            Model model
+    ) {
+
+        user.getLaptops().add(laptop);
+        userRepo.save(user);
 
         return "redirect:/";
     }

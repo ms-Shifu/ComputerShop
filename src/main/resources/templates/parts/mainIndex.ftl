@@ -1,7 +1,7 @@
 <#import "filters.ftl" as f>
 <#import "sectionIndex.ftl" as s>
 
-<main class="mb-5">
+<main class="mb-0">
     <div class="container">
 
         <#include "navbarIn.ftl">

@@ -4,11 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class TabletsIndexController {
+public class TabletsController {
 
-    @GetMapping("/tabletsIndex")
+    @GetMapping("/tablets")
     public String tabletsIndex() {
 
-        return "tabletsIndex";
+        return "tablets";
     }
 }

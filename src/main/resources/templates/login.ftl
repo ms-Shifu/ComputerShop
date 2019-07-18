@@ -2,33 +2,20 @@
 
 <@c.page>
 
-<div>
-    <form action="/login" method="post" class="text-center border border-light p-5">
+<main class="container">
+        <form action="/login" method="post" class="text-center border border-light p-5">
 
-        <p class="h4 mb-4">Sign In</p>
+            <p class="h4 mb-4 text-secondary">Sign In</p>
 
-        <div class="">
-            <input type="text" name="username" id="defaultLoginFormEmail" class="form-control mb-4 col-4 mx-auto" placeholder="Username" autofocus required>
-            <input type="password" name="password" id="defaultLoginFormPassword" class="form-control mb-4 col-4 mx-auto" placeholder="Password" required>
-            <button class="btn btn-info btn-block my-4 col-4 mx-auto" type="submit">Sign In</button>
-            <input type="hidden" name="_csrf" value="${_csrf.token}">
-        </div>
-    </form>
-</div>
+            <div class="">
+                <input type="text" name="username" id="defaultLoginFormEmail" class="form-control mb-4 col-9 mx-auto" placeholder="Username" autofocus required maxlength="50">
+                <input type="password" name="password" id="defaultLoginFormPassword" class="form-control mb-4 col-9 mx-auto" placeholder="Password" required maxlength="50">
+                <button class="btn btn-info btn-block my-4 col-9 mx-auto" type="submit">Sign In</button>
+                <input type="hidden" name="_csrf" value="${_csrf.token}">
+            </div>
+
+            <a href="/registration">Add new user</a>
+        </form>
+</main>
 
 </@c.page>
-
-<#--<!DOCTYPE html>-->
-
-<#--<head>-->
-    <#--<title>Spring Security Example </title>-->
-<#--</head>-->
-<#--<body>-->
-<#--<form action="/login" method="post">-->
-    <#--<div><label> User Name : <input type="text" name="username"/> </label></div>-->
-    <#--<div><label> Password: <input type="password" name="password"/> </label></div>-->
-    <#--<div><input type="submit" value="Sign In"/></div>-->
-    <#---->
-<#--</form>-->
-<#--</body>-->
-<#--</html>-->
