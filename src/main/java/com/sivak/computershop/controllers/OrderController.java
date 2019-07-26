@@ -19,6 +19,8 @@ public class OrderController {
     @GetMapping("/order")
     private String order() {
 
+
+
         return "order";
     }
 
@@ -27,6 +29,7 @@ public class OrderController {
     public String buyOrder(
             @AuthenticationPrincipal Users users,
             @RequestParam Long buyProduct,
+            @RequestParam Class typeOdClass,
             Model model
     ) {
 
@@ -38,11 +41,10 @@ public class OrderController {
 //        }
 
 
-
-//        Laptops laptops = (Laptops) buyProduct;
-////        Laptops laptops2 = product;
+//
+////        Laptops laptops = (Laptops) buyProduct;
+//////        Laptops laptops2 = product;
 
         return "redirect:/order";
     }
-
 }

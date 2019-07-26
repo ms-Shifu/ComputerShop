@@ -2,6 +2,6 @@
 
 <@c.page>
 
-    <#include "parts/mainTablets.ftl">
+<#include "parts/mainEditTablets.ftl">
 
 </@c.page>

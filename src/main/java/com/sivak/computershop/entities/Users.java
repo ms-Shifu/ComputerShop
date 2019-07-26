@@ -31,6 +31,10 @@ public class Users implements UserDetails {
 //    @JoinColumn(name = "laptops_id")
     private List<Laptops> laptops;
 
+    @OrderColumn
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Tablets> tablets;
+
     public Users() {
     }
 
@@ -101,7 +105,7 @@ public class Users implements UserDetails {
     }
 
     public int getInCart() {
-        return inCart = laptops.size();
+        return inCart = laptops.size() + tablets.size();
     }
 
     public void setInCart(int inCart) {
@@ -142,5 +146,13 @@ public class Users implements UserDetails {
 
     public boolean isAdmin() {
         return this.roles.contains(Roles.ADMIN);
+    }
+
+    public List<Tablets> getTablets() {
+        return tablets;
+    }
+
+    public void setTablets(List<Tablets> tablets) {
+        this.tablets = tablets;
     }
 }

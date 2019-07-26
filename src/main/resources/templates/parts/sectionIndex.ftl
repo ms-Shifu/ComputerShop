@@ -4,7 +4,7 @@
             <#list laptops as laptop>
                 <div class="col-lg-4 col-md-6 mt-2">
                     <div class="card" style="height: 22rem;">
-                        <img src="/img/${laptop.fileName}" class="card-img-top mt-1" alt="laptop">
+                        <img src="/img/${laptop.fileName}" class="card-img-top mt-1 px-2" alt="laptop">
                         <div class="card-body  text-center">
                             <h5 class="card-title text-center">${laptop.manufacturer} ${laptop.model}</h5>
                             <p class="card-text text-center">${laptop.monitor}", ${laptop.cpu}, ${laptop.ram}Gb,
@@ -12,8 +12,8 @@
                             <div>
                                 <strong class="text-primary mr-4 align-middle">$${laptop.getPrice()?string["0.00"]}</strong>
                                 <#--<a href="#" class="btn btn-primary">Add to cart</a>-->
-                                <form class="d-inline" action="addToCart" method="post">
-                                    <button class="btn btn-primary" name="buttonAddToCart" value="${laptop.id}">Add to cart</button>
+                                <form class="d-inline" action="addLaptopToCart" method="post">
+                                    <button class="btn btn-primary" name="buttonAddLaptopToCart" value="${laptop.id}">Add to cart</button>
                                     <input type="hidden" name="_csrf" value="${_csrf.token}">
                                 </form>
                             </div>

@@ -6,6 +6,9 @@
 
     <#list laptops as laptop>
         <h5>${laptop}</h5>
+
+    <#else >
+        <div>Empty</div>
     </#list>
 
 </main>

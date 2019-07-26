@@ -21,7 +21,7 @@
                     </div>
                     <div class="form-group">
                     <#--<label for="input3">Monitor</label>-->
-                        <input type="number" name="monitor" class="form-control" id="input3" placeholder="Enter Monitor, inch" required min="7" max="19">
+                        <input type="number" name="monitor" class="form-control" id="input3" placeholder="Enter Screen Size, inch" required min="7" max="19">
                     </div>
                     <div class="form-group">
                     <#--<label for="input4">CPU</label>-->
@@ -37,7 +37,7 @@
                     </div>
                     <div class="form-group">
                     <#--<label for="input7">Storage Size</label>-->
-                        <input type="number" name="storageSize" class="form-control" id="input7" placeholder="Enter Storage Size, Gb" required min="100" max="99999">
+                        <input type="number" name="storageSize" class="form-control" id="input7" placeholder="Enter Storage Capacity, Gb" required min="100" max="99999">
                     </div>
                     <div class="form-group">
                     <#--<label for="input8">Video Card</label>-->
@@ -71,13 +71,15 @@
                 <thead>
                 <tr class="row">
                     <th scope="col" class="col-1">Manufact.</th>
-                    <th scope="col" class="col-3">Model</th>
-                    <th scope="col" class="col-1">Monitor</th>
+                    <th scope="col" class="col-2">Model</th>
+                    <th scope="col" class="col-1">Screen Size</th>
                     <th scope="col" class="col-2">CPU</th>
                     <th scope="col" class="col-1">RAM, Gb</th>
                     <th scope="col" class="col-1">Storage type</th>
-                    <th scope="col" class="col-1">Storage size, Gb</th>
-                    <th scope="col" class="col-2">Video card</th>
+                    <th scope="col" class="col-1">Storage Capacity, Gb</th>
+                    <th scope="col" style="width: 150px;">Video card</th>
+                    <th scope="col" style="width: 125px;">Price</th>
+
                 </tr>
                 </thead>
             </table>
@@ -127,7 +129,7 @@
                                name="videoCard" value="${laptop.videoCard}" maxlength="50">
                     </div>
                     <div class="ml-1" style="width: 125px;">
-                        <label class="sr-only" for="inlineFormInput9">videoCard</label>
+                        <label class="sr-only" for="inlineFormInput9">price</label>
                         <input type="number" class="form-control mb-2" id="inlineFormInput9"
                                name="price" value="${laptop.getPrice()?c}" min="0.01" max="99999.99" step="0.01">
                     </div>

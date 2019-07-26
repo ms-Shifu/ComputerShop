@@ -1,12 +1,12 @@
 package com.sivak.computershop.controllers;
 
 import com.sivak.computershop.entities.Laptops;
+import com.sivak.computershop.entities.Tablets;
 import com.sivak.computershop.entities.Users;
 import com.sivak.computershop.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,13 +28,19 @@ public class CartController {
     @PostMapping("/removeFromCart")
     public String removeFromCart(
             @AuthenticationPrincipal Users user,
-            @RequestParam("removeLaptop") Laptops laptop,
-            Model model
+            @RequestParam(value = "removeLaptop", required = false) Laptops laptop,
+            @RequestParam(value = "removeTablet", required = false) Tablets tablet
     ) {
 
-        List<Laptops> laptopsList = user.getLaptops();
-        laptopsList.remove(laptop);
+        if (laptop != null) {
+            List<Laptops> laptopsList = user.getLaptops();
+            laptopsList.remove(laptop);
+        }
 
+        if (tablet != null) {
+            List<Tablets> tabletsList = user.getTablets();
+            tabletsList.remove(tablet);
+        }
 
         userRepo.save(user);
 

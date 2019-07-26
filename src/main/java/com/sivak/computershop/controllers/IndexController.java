@@ -1,11 +1,12 @@
 package com.sivak.computershop.controllers;
 
 import com.sivak.computershop.entities.Laptops;
+import com.sivak.computershop.entities.Tablets;
 import com.sivak.computershop.entities.Users;
 import com.sivak.computershop.repos.LaptopsRepo;
 import com.sivak.computershop.repos.UserRepo;
+import com.sivak.computershop.service.LaptopsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,23 +15,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Controller
 public class IndexController {
+
     @Autowired
     private LaptopsRepo laptopsRepo;
 
     @Autowired
-    private UserRepo userRepo;
+    private LaptopsService laptopsService;
 
-    @Value("${upload.path}")
-    private String uploadPath;
+    @Autowired
+    private UserRepo userRepo;
 
     @GetMapping("/")
     public String filter(
@@ -45,213 +43,11 @@ public class IndexController {
             @RequestParam(required = false, defaultValue = "99999.99") double price2,
             Model model) {
 
-        List<Laptops> laptops = new ArrayList<>();
 
-        if (monitor != null || manufacturer != null || cpu != null || ram != null || storageType != null ||
-                storageSize != null || videoCard != null || price1 != 0 || price2 != 0) {
+        List<Laptops> laptops = laptopsService.filter(monitor, manufacturer, cpu, ram, storageType,
+                storageSize, videoCard, price1, price2);
 
-//            List<Laptops> laptopsEmpty = new ArrayList<>();
-
-//----------MONITOR
-
-            if (monitor != null) {
-                for (Integer m : monitor) {
-                    laptops.addAll(laptopsRepo.findByMonitor(m));
-                }
-
-                if (laptops.isEmpty()) {
-                    model.addAttribute("laptops", laptops);
-                    return "index";
-                }
-            }
-
-//----------MANUFACTURER
-
-            if (manufacturer != null) {
-
-                if (laptops.isEmpty()) {
-                    laptops.addAll(laptopsRepo.findByManufacturer(manufacturer.toUpperCase()));
-                } else {
-                    laptops = laptops.stream()
-                            .filter(l->l.getManufacturer().equals(manufacturer.toUpperCase()))
-                            .collect(Collectors.toList());
-                }
-
-                if (laptops.isEmpty()) {
-                    model.addAttribute("laptops", laptops);
-                    return "index";
-                }
-            }
-
-//----------CPU
-
-            if (cpu != null) {
-
-                if (laptops.isEmpty()) {
-                    laptops.addAll(laptopsRepo.findByCpu(cpu));
-                } else {
-                    laptops = laptops.stream()
-                            .filter(l->l.getCpu().equals(cpu))
-                            .collect(Collectors.toList());
-                }
-
-                if (laptops.isEmpty()) {
-                    model.addAttribute("laptops", laptops);
-                    return "index";
-                }
-            }
-
-//----------RAM
-
-            if (ram != null) {
-
-                if (laptops.isEmpty()) {
-                    for (Integer r : ram) {
-                        laptops.addAll(laptopsRepo.findByRam(r));
-                    }
-
-                    if (laptops.isEmpty()) {
-                        model.addAttribute("laptops", laptops);
-                        return "index";
-                    }
-                } else {
-
-                    List<Laptops> laptopsEmpty = new ArrayList<>();
-
-                    for (int r : ram) {
-                        laptopsEmpty.addAll(laptops.stream()
-                                .filter(l-> (l.getRam() == r))
-                                .collect(Collectors.toList()));
-                    }
-
-                    if (laptopsEmpty.isEmpty()) {
-                        model.addAttribute("laptops", laptopsEmpty);
-                        return "index";
-                    } else {
-                        laptops = laptopsEmpty;
-                    }
-                }
-            }
-
-//----------STORAGE_TYPE
-
-            if (storageType != null) {
-
-                if (laptops.isEmpty()) {
-                    for (String s : storageType) {
-                        laptops.addAll(laptopsRepo.findByStorageType(s));
-                    }
-
-                    if (laptops.isEmpty()) {
-                        model.addAttribute("laptops", laptops);
-                        return "index";
-                    }
-                } else {
-
-                    List<Laptops> laptopsEmpty = new ArrayList<>();
-
-                    for (String s : storageType) {
-                        laptopsEmpty.addAll(laptops.stream()
-                                .filter(l-> l.getStorageType().equals(s))
-                                .collect(Collectors.toList()));
-                    }
-
-                    if (laptopsEmpty.isEmpty()) {
-                        model.addAttribute("laptops", laptopsEmpty);
-                        return "index";
-                    } else {
-                       laptops = laptopsEmpty;
-                    }
-                }
-            }
-
-//----------STORAGE_SIZE
-
-            if (storageSize != null) {
-
-                if (laptops.isEmpty()) {
-                    for (Integer s : storageSize) {
-                        laptops.addAll(laptopsRepo.findByStorageSize(s));
-                        }
-
-                    if (laptops.isEmpty()) {
-                        model.addAttribute("laptops", laptops);
-                        return "index";
-                    }
-                } else {
-
-                    List<Laptops> laptopsEmpty = new ArrayList<>();
-
-                    for (int s : storageSize) {
-                        laptopsEmpty.addAll(laptops.stream()
-                                .filter(l-> (l.getStorageSize() == s))
-                                .collect(Collectors.toList()));
-                    }
-
-                    if (laptopsEmpty.isEmpty()) {
-                        model.addAttribute("laptops", laptopsEmpty);
-                        return "index";
-                    } else {
-                        laptops = laptopsEmpty;
-                    }
-                }
-            }
-
-//----------VIDEO_CARD
-
-            if (videoCard != null) {
-
-                if (laptops.isEmpty()) {
-                    for (String v : videoCard) {
-                        laptops.addAll(laptopsRepo.findByVideoCard(v));
-                    }
-
-                    if (laptops.isEmpty()) {
-                        model.addAttribute("laptops", laptops);
-                        return "index";
-                    }
-                } else {
-
-                    List<Laptops> laptopsEmpty = new ArrayList<>();
-
-                    for (String v : videoCard) {
-                        laptopsEmpty.addAll(laptops.stream()
-                                .filter(l-> l.getVideoCard().equals(v))
-                                .collect(Collectors.toList()));
-                    }
-
-                    if (laptopsEmpty.isEmpty()) {
-                        model.addAttribute("laptops", laptopsEmpty);
-                        return "index";
-                    } else {
-                        laptops = laptopsEmpty;
-                    }
-                }
-            }
-
-//----------PRICE
-
-            if (price1 != 0 || price2 != 0) {
-
-                if (laptops.isEmpty()) {
-                    laptops.addAll(laptopsRepo.findByPriceBetween(price1, price2));
-                } else {
-                    laptops = laptops.stream()
-                            .filter(p->(p.getPrice() >= price1 && p.getPrice() <= price2))
-                            .collect(Collectors.toList());
-                }
-
-                if (laptops.isEmpty()) {
-                    model.addAttribute("laptops", laptops);
-                    return "index";
-                }
-            }
-
-        } else {
-            laptops = laptopsRepo.findAll();
-        }
-
-
+        model.addAttribute("classType", "laptops");
         model.addAttribute("laptops", laptops);
 
         return "index";
@@ -268,8 +64,7 @@ public class IndexController {
     }
 
     @PostMapping("/laptopsEditAdd")
-    public String addLaptop(Model model2,
-                            @RequestParam String manufacturer,
+    public String addLaptop(@RequestParam String manufacturer,
                             @RequestParam String model,
                             @RequestParam int monitor,
                             @RequestParam String cpu,
@@ -278,25 +73,12 @@ public class IndexController {
                             @RequestParam int storageSize,
                             @RequestParam String videoCard,
                             @RequestParam double price,
-                            @RequestParam("file")MultipartFile file
-    ) throws IOException {
+                            @RequestParam("file")MultipartFile file) throws IOException {
 
         Laptops laptop = new Laptops(manufacturer, model, monitor, cpu, ram, storageType,
                 storageSize, videoCard, price);
 
-        File uploadsFile = new File(uploadPath);
-
-        if (!uploadsFile.exists()) {
-            uploadsFile.mkdir();
-        }
-
-        String uuidName = UUID.randomUUID().toString();
-        String resultFileName = uuidName + "." + file.getOriginalFilename();
-        laptop.setFileName(resultFileName);
-
-        file.transferTo(new File(uploadPath + "/" + resultFileName));
-
-        laptopsRepo.save(laptop);
+        laptopsService.saveLaptop(laptop, file);
 
         return "redirect:/laptopsEdit";
     }
@@ -315,21 +97,8 @@ public class IndexController {
                                     @RequestParam double price
     ) {
 
-        if (buttonEdit.equals("edit")) {
-            laptop.setManufacturer(manufacturer);
-            laptop.setModel(model);
-            laptop.setMonitor(monitor);
-            laptop.setCpu(cpu);
-            laptop.setRam(ram);
-            laptop.setStorageType(storageType);
-            laptop.setStorageSize(storageSize);
-            laptop.setVideoCard(videoCard);
-            laptop.setPrice(price);
-
-            laptopsRepo.save(laptop);
-        } else {
-            laptopsRepo.delete(laptop);
-        }
+        laptopsService.laptopEditOrDelete(laptop, buttonEdit, manufacturer, model,
+                monitor, cpu, ram, storageType, storageSize, videoCard, price);
 
         return "redirect:/laptopsEdit";
     }
@@ -343,11 +112,10 @@ public class IndexController {
 
 
 
-    @PostMapping("/addToCart")
+    @PostMapping("/addLaptopToCart")
     public String addToCart(
             @AuthenticationPrincipal Users user,
-            @RequestParam("buttonAddToCart") Laptops laptop,
-            Model model
+            @RequestParam("buttonAddLaptopToCart") Laptops laptop
     ) {
 
         user.getLaptops().add(laptop);

@@ -1,9 +1,30 @@
 <#macro filters path>
 <form method="get" action="${path}">
 
-<#--MONITORS-->
+<#--OS_Tablets-->
 
-    <span class="font-weight-bolder" style="font-size: 0.95rem;">Monitor</span>
+    <#if classType == "tablets">
+    <span class="font-weight-bolder" style="font-size: 0.95rem;">Operating System</span>
+    <div class="form-group">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="os" value="iOS" class="custom-control-input" id="customCheck01" >
+            <label class="custom-control-label" for="customCheck01">iOS</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="os" value="Android" class="custom-control-input" id="customCheck02">
+            <label class="custom-control-label" for="customCheck02">Android</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="os" value="Windows" class="custom-control-input" id="customCheck03">
+            <label class="custom-control-label" for="customCheck03">Windows</label>
+        </div>
+    </div>
+    </#if>
+
+<#--SCREEN SIZE-->
+
+    <#if classType == "laptops">
+    <span class="font-weight-bolder" style="font-size: 0.95rem;">Screen Size</span>
     <div class="form-group">
         <div class="custom-control custom-checkbox">
             <input type="checkbox" name="monitor" value="13" class="custom-control-input" id="customCheck1" >
@@ -22,39 +43,106 @@
             <label class="custom-control-label" for="customCheck4">17"</label>
         </div>
     </div>
+    </#if>
 
-    <#--MANUFACTURER-->
 
+    <#if classType == "tablets">
+    <span class="font-weight-bolder" style="font-size: 0.95rem;">Screen Size</span>
     <div class="form-group">
-        <span class="font-weight-bolder" style="font-size: 0.95rem;">Manufacturer</span>
-        <select class="custom-select" name="manufacturer">
-            <option selected disabled>Choose...</option>
-            <option value="Acer">Acer</option>
-            <option value="Apple">Apple</option>
-            <option value="Asus">Asus</option>
-            <option value="HP">HP</option>
-            <option value="Lenovo">Lenovo</option>
-            <option value="DELL">DELL</option>
-        </select>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="monitor" value="7" class="custom-control-input" id="customCheck1" >
+            <label class="custom-control-label" for="customCheck1">7"</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="monitor" value="8" class="custom-control-input" id="customCheck2">
+            <label class="custom-control-label" for="customCheck2">8"</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="monitor" value="9" class="custom-control-input" id="customCheck3">
+            <label class="custom-control-label" for="customCheck3">9"</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="monitor" value="10" class="custom-control-input" id="customCheck4">
+            <label class="custom-control-label" for="customCheck4">10"</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="monitor" value="12" class="custom-control-input" id="customCheck41">
+            <label class="custom-control-label" for="customCheck41">12"</label>
+        </div>
     </div>
+    </#if>
 
-    <#--CPU-->
 
-    <div class="form-group">
-        <span class="font-weight-bolder" style="font-size: 0.95rem;">CPU</span>
-        <select class="custom-select" name="cpu">
-            <option selected disabled>Choose...</option>
-            <option value="Intel Core i3">Intel Core i3</option>
-            <option value="Intel Core i5">Intel Core i5</option>
-            <option value="Intel Core i7">Intel Core i7</option>
-            <option value="Intel Core i9">Intel Core i9</option>
-        </select>
-    </div>
+<#--MANUFACTURER-->
+    <#if classType == "laptops">
+        <div class="form-group">
+            <span class="font-weight-bolder" style="font-size: 0.95rem;">Manufacturer</span>
+            <select class="custom-select" name="manufacturer">
+                <option selected disabled>Choose...</option>
+                <option value="Acer">Acer</option>
+                <option value="Apple">Apple</option>
+                <option value="Asus">Asus</option>
+                <option value="HP">HP</option>
+                <option value="Lenovo">Lenovo</option>
+                <option value="DELL">DELL</option>
+            </select>
+        </div>
+    </#if>
 
-    <#--RAM-->
 
-    <h6 class="font-weight-bolder" style="font-size: 0.95rem;">RAM</h6>
-    <div class="form-group">
+    <#if classType == "tablets">
+         <div class="form-group">
+             <span class="font-weight-bolder" style="font-size: 0.95rem;">Manufacturer</span>
+             <select class="custom-select" name="manufacturer">
+                 <option selected disabled>Choose...</option>
+                 <option value="Apple">Apple</option>
+                 <option value="Samsung">Samsung</option>
+                 <option value="Xiaomi">Asus</option>
+                 <option value="Huawei">HP</option>
+                 <option value="Lenovo">Lenovo</option>
+                 <option value="Microsoft">DELL</option>
+             </select>
+         </div>
+    </#if>
+
+<#--CPU-->
+
+    <#if classType == "laptops">
+        <div class="form-group">
+            <span class="font-weight-bolder" style="font-size: 0.95rem;">CPU</span>
+            <select class="custom-select" name="cpu">
+                <option selected disabled>Choose...</option>
+                <option value="Intel Core i3">Intel Core i3</option>
+                <option value="Intel Core i5">Intel Core i5</option>
+                <option value="Intel Core i7">Intel Core i7</option>
+                <option value="Intel Core i9">Intel Core i9</option>
+            </select>
+        </div>
+    </#if>
+
+     <#if classType == "tablets">
+        <div class="form-group">
+            <span class="font-weight-bolder" style="font-size: 0.95rem;">CPU</span>
+            <select class="custom-select" name="cpu">
+                <option selected disabled>Choose...</option>
+                <option value="Apple A">Apple A</option>
+                <option value="Exynos">Exynos</option>
+                <option value="Qualcomm">Qualcomm</option>
+                <option value="MediaTeck">MediaTeck</option>
+                <option value="Hisilicon Kirin">Hisilicon Kirin</option>
+                <option value="Huawei HiSilicon">Huawei HiSilicon</option>
+                <option value="Intel Atom">Intel Atom</option>
+                <option value="Rockchip">Rockchip</option>
+                <option value="Allwinner">Allwinner</option>
+            </select>
+        </div>
+    </#if>
+
+<#--RAM-->
+
+    <#if classType == "laptops">
+        <h6 class="font-weight-bolder" style="font-size: 0.95rem;">RAM</h6>
+        <div class="form-group">
         <div class="custom-control custom-checkbox">
             <input type="checkbox" name="ram" value="2" class="custom-control-input" id="customCheck5">
             <label class="custom-control-label" for="customCheck5">2Gb</label>
@@ -72,9 +160,54 @@
             <label class="custom-control-label" for="customCheck8">16Gb</label>
         </div>
     </div>
+    </#if>
+
+
+    <#if classType == "tablets">
+        <h6 class="font-weight-bolder" style="font-size: 0.95rem;">RAM</h6>
+        <div class="form-group">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="ram" value="2" class="custom-control-input" id="customCheck5">
+            <label class="custom-control-label" for="customCheck5">2Gb</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="ram" value="4" class="custom-control-input" id="customCheck6">
+            <label class="custom-control-label" for="customCheck6">4Gb</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="ram" value="4" class="custom-control-input" id="customCheck7">
+            <label class="custom-control-label" for="customCheck7">6Gb</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="ram" value="8" class="custom-control-input" id="customCheck8">
+            <label class="custom-control-label" for="customCheck8">8Gb</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="ram" value="16" class="custom-control-input" id="customCheck81">
+            <label class="custom-control-label" for="customCheck81">16Gb</label>
+        </div>
+    </div>
+    </#if>
+
+    <#--FLASH CARD_Tablests-->
+
+    <#if classType == "tablets">
+         <h6 class="font-weight-bolder" style="font-size: 0.95rem;">Flash Card</h6>
+    <div class="form-group">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="flashCard" value="true" class="custom-control-input" id="customCheck9">
+            <label class="custom-control-label" for="customCheck9">Yes</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="flashCard" value="false" class="custom-control-input" id="customCheck10">
+            <label class="custom-control-label" for="customCheck10">No</label>
+        </div>
+    </div>
+    </#if>
 
 <#--STORAGE TYPE-->
 
+    <#if classType == "laptops">
     <h6 class="font-weight-bolder" style="font-size: 0.95rem;">Storage Type</h6>
     <div class="form-group">
         <div class="custom-control custom-checkbox">
@@ -86,10 +219,12 @@
             <label class="custom-control-label" for="customCheck10">HDD</label>
         </div>
     </div>
+    </#if>
 
-<#--Hard Drive Size-->
+<#--STORAGE CAPACITY-->
 
-    <span class="font-weight-bolder" style="font-size: 0.95rem;">Hard Drive Size</span>
+    <#if classType == "laptops">
+    <span class="font-weight-bolder" style="font-size: 0.95rem;">Storage Capacity</span>
     <div class="form-group">
         <div class="custom-control custom-checkbox">
             <input type="checkbox" name="storageSize" value="125" class="custom-control-input" id="customCheck101">
@@ -112,9 +247,46 @@
             <label class="custom-control-label" for="customCheck14">2Tb</label>
         </div>
     </div>
+    </#if>
 
-    <#--Video Card-->
+    <#if classType == "tablets">
+    <span class="font-weight-bolder" style="font-size: 0.95rem;">Storage Capacity</span>
+    <div class="form-group">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="storageSize" value="8" class="custom-control-input" id="customCheck101">
+            <label class="custom-control-label" for="customCheck101">8Gb</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="storageSize" value="16" class="custom-control-input" id="customCheck11">
+            <label class="custom-control-label" for="customCheck11">16Gb</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="storageSize" value="32" class="custom-control-input" id="customCheck12">
+            <label class="custom-control-label" for="customCheck12">32Gb</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="storageSize" value="64" class="custom-control-input" id="customCheck13">
+            <label class="custom-control-label" for="customCheck13">64Gb</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="storageSize" value="128" class="custom-control-input" id="customCheck131">
+            <label class="custom-control-label" for="customCheck131">128Gb</label>
+        </div>
+         <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="storageSize" value="256" class="custom-control-input" id="customCheck132">
+            <label class="custom-control-label" for="customCheck132">256Gb</label>
+        </div>
+         <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="storageSize" value="512" class="custom-control-input" id="customCheck133">
+            <label class="custom-control-label" for="customCheck133">512Gb</label>
+        </div>
+    </div>
+    </#if>
 
+
+<#--VIDEO CARD-->
+
+    <#if classType == "laptops">
     <span class="font-weight-bolder" style="font-size: 0.95rem;">Video Card</span>
     <div class="form-group">
         <div class="custom-control custom-checkbox">
@@ -130,8 +302,32 @@
             <label class="custom-control-label" for="customCheck17">Intel HD Graphics</label>
         </div>
     </div>
+    </#if>
 
-    <#--Price-->
+    <#if classType == "tablets">
+    <span class="font-weight-bolder" style="font-size: 0.95rem;">Video Adapter</span>
+    <div class="form-group">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="videoCard" value="ARM Mali" class="custom-control-input" id="customCheck15">
+            <label class="custom-control-label" for="customCheck15">ARM Mali</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="videoCard" value="Qualcomm Adreno" class="custom-control-input" id="customCheck16">
+            <label class="custom-control-label" for="customCheck16">Qualcom Adreno</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="videoCard" value="Intel HD Graphics" class="custom-control-input" id="customCheck17">
+            <label class="custom-control-label" for="customCheck17">Intel HD Graphics</label>
+        </div>
+         <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="videoCard" value="Bionic" class="custom-control-input" id="customCheck18">
+            <label class="custom-control-label" for="customCheck18">Bionic</label>
+        </div>
+
+    </div>
+    </#if>
+
+<#--PRICE-->
 
     <span class="font-weight-bolder" style="font-size: 0.95rem;">Price</span>
     <div class="form-row form-group">
@@ -143,7 +339,10 @@
         </div>
     </div>
 
+
+
     <button type="submit" class="btn btn-primary mx-auto d-block">Find</button>
     <input type="hidden" name="_csrf" value="${_csrf.token}">
+
 </form>
 </#macro>

@@ -133,4 +133,46 @@ public class Tablets {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Tablets tablets = (Tablets) o;
+
+        if (monitor != tablets.monitor) return false;
+        if (ram != tablets.ram) return false;
+        if (flashCard != tablets.flashCard) return false;
+        if (Double.compare(tablets.price, price) != 0) return false;
+        if (id != null ? !id.equals(tablets.id) : tablets.id != null) return false;
+        if (os != null ? !os.equals(tablets.os) : tablets.os != null) return false;
+        if (manufacturer != null ? !manufacturer.equals(tablets.manufacturer) : tablets.manufacturer != null)
+            return false;
+        if (model != null ? !model.equals(tablets.model) : tablets.model != null) return false;
+        if (cpu != null ? !cpu.equals(tablets.cpu) : tablets.cpu != null) return false;
+        if (storageSize != null ? !storageSize.equals(tablets.storageSize) : tablets.storageSize != null) return false;
+        if (videoCard != null ? !videoCard.equals(tablets.videoCard) : tablets.videoCard != null) return false;
+        return fileName != null ? fileName.equals(tablets.fileName) : tablets.fileName == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (os != null ? os.hashCode() : 0);
+        result = 31 * result + (manufacturer != null ? manufacturer.hashCode() : 0);
+        result = 31 * result + (model != null ? model.hashCode() : 0);
+        result = 31 * result + monitor;
+        result = 31 * result + (cpu != null ? cpu.hashCode() : 0);
+        result = 31 * result + ram;
+        result = 31 * result + (flashCard ? 1 : 0);
+        result = 31 * result + (storageSize != null ? storageSize.hashCode() : 0);
+        result = 31 * result + (videoCard != null ? videoCard.hashCode() : 0);
+        result = 31 * result + (fileName != null ? fileName.hashCode() : 0);
+        temp = Double.doubleToLongBits(price);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 }

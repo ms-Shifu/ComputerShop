@@ -1,8 +1,8 @@
 <#include "security.ftl">
 
     <nav class="navbar navbar-expand navbar-dark bg-primary">
-        <div style="background-color: #2A8EFF;">
-            <a class="navbar-brand pl-3" href="#">Catalog:</a>
+        <div>
+            <a class="navbar-brand pl-3 text-dark text-uppercase" href="#">Catalog:</a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -18,6 +18,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/tablets">Tablets</a>
+                     <#if isAdmin>
+                        <a class="nav-link text-dark" href="/tabletsEdit" style="margin-top: -15px;">-Edit-</a>
+                     </#if>
                 </li>
             </ul>
         </div>
