@@ -14,6 +14,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/contacts">Contacts</a>
             </li>
+            <#if isAdmin>
+                 <li class="nav-item">
+                     <a class="nav-link" href="/orders">Orders</a>
+                 </li>
+            </#if>
         </ul>
 
         <ul class="navbar-nav mr-5">

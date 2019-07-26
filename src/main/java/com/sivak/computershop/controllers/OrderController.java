@@ -1,7 +1,8 @@
 package com.sivak.computershop.controllers;
 
+import com.sivak.computershop.entities.Orders;
 import com.sivak.computershop.entities.Users;
-import com.sivak.computershop.repos.LaptopsRepo;
+import com.sivak.computershop.repos.OrdersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -10,23 +11,31 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class OrderController {
 
-    @Autowired
-    private LaptopsRepo laptopsRepo;
-
-    @GetMapping("/order")
-    private String order() {
+   @Autowired
+   private OrdersRepo ordersRepo;
 
 
 
-        return "order";
+    @GetMapping("/orders")
+    public String orders(Model model) {
+
+        List<Orders> orders = ordersRepo.findAll();
+
+        model.addAttribute("orders", orders);
+
+        System.out.println(orders);
+
+        return "orders";
     }
 
 
-    @PostMapping("/order")
-    public String buyOrder(
+    @PostMapping("/orders")
+    public String buyOrders(
             @AuthenticationPrincipal Users users,
             @RequestParam Long buyProduct,
             @RequestParam Class typeOdClass,
@@ -45,6 +54,6 @@ public class OrderController {
 ////        Laptops laptops = (Laptops) buyProduct;
 //////        Laptops laptops2 = product;
 
-        return "redirect:/order";
+        return "redirect:/orders";
     }
 }

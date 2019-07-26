@@ -8,6 +8,8 @@
     <p class="h4 mb-4 text-center text-secondary">In cart</p>
 
 
+    <#--LAPTOPS-->
+
     <#list user.laptops as laptop>
 
         <div class="card mb-3 mx-auto" style="max-width: 940px;">
@@ -29,15 +31,16 @@
 
                         <form class="d-inline" action="removeFromCart" method="post">
                             <div class="from-group mb-2">
-                                <button class="btn btn-warning" name="removeLaptop" value="${laptop.id}">Remove</button>
+                                <button class="btn btn-warning" name="removeLaptop"
+                                        value="${laptop.id}">Remove</button>
                                 <input type="hidden" name="_csrf" value="${_csrf.token}">
                             </div>
-
                         </form>
 
-                        <form class="d-inline" action="order" method="post">
+                        <form class="d-inline" action="buy" method="post">
                             <div class="from-group">
-                                <button class="btn btn-primary" name="buyProduct" value="${laptop.id}" style="width: 83px;">Buy</button>
+                                <button class="btn btn-primary" name="laptopId" value="${laptop.id}"
+                                        style="width: 83px;">Buy</button>
                                 <input type="hidden" name="_csrf" value="${_csrf.token}">
                             </div>
                         </form>
@@ -50,10 +53,14 @@
     <#else >
 
           <div class="container">
-              <p>Cart is empty</p>
+              <p>Cart is empty.</p>
           </div>
 
     </#list>
+
+
+
+    <#--TABLETS-->
 
      <#list user.tablets as tablet>
 
@@ -85,27 +92,27 @@
 
                         </form>
 
-                        <form class="d-inline" action="order" method="post">
+                        <form class="d-inline" action="buy" method="post">
                             <div class="from-group">
-                                <button class="btn btn-primary" name="buyProduct" value="${tablet.id}" style="width: 83px;">Buy</button>
+                                <button class="btn btn-primary" name="tabletId" value="${tablet.id}" style="width: 83px;">Buy</button>
                                 <input type="hidden" name="_csrf" value="${_csrf.token}">
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
         </div>
-
-     <#else >
-
-          <#--<div class="container">-->
-              <#--<p>Cart is empty</p>-->
-          <#--</div>-->
-
      </#list>
 
+        <hr class="my-3"/>
 
+    <#if user.getInCart() gt 1 >
+         <form action="buy" method="post" class="text-right">
+             <button class="btn btn-primary" name="isAddAll" value="true"
+                     style="width: 83px;">Buy All</button>
+             <input type="hidden" name="_csrf" value="${_csrf.token}">
+         </form>
+    </#if>
 
 </main>
 

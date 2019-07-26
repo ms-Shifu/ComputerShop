@@ -1,7 +1,6 @@
 package com.sivak.computershop.controllers;
 
 import com.sivak.computershop.entities.Laptops;
-import com.sivak.computershop.entities.Tablets;
 import com.sivak.computershop.entities.Users;
 import com.sivak.computershop.repos.LaptopsRepo;
 import com.sivak.computershop.repos.UserRepo;

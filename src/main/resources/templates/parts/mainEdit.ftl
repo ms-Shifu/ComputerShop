@@ -10,6 +10,7 @@
             </a>
 
             <div class="collapse mt-3" id="collapseAddNewLaptop">
+
                 <form method="post" action="/laptopsEditAdd" enctype="multipart/form-data" autocomplete="on">
                     <div class="form-group">
                     <#--<label for="input1">Manufacturer</label>-->

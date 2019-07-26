@@ -17,8 +17,6 @@ public class Users implements UserDetails {
     private String username;
     private String password;
     private boolean active;
-//    @Column(name = "inCart", nullable = false,  columnDefinition = "INTEGER DEFAULT 0")
-    private int inCart;
     private String address;
     private String phoneNumber;
 
@@ -41,10 +39,8 @@ public class Users implements UserDetails {
     public Users(String username, String password, String address, String phoneNumber) {
         this.username = username;
         this.password = password;
-//        this.active = active;
         this.address = address;
         this.phoneNumber = phoneNumber;
-        inCart = 0;
     }
 
     public Long getId() {
@@ -105,12 +101,12 @@ public class Users implements UserDetails {
     }
 
     public int getInCart() {
-        return inCart = laptops.size() + tablets.size();
+        return laptops.size() + tablets.size();
     }
 
-    public void setInCart(int inCart) {
-        this.inCart = inCart;
-    }
+//    public void setInCart(int inCart) {
+//        this.inCart = inCart;
+//    }
 
     public Set<Roles> getRoles() {
         return roles;

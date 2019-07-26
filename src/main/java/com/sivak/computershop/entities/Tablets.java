@@ -59,7 +59,7 @@ public class Tablets {
     }
 
     public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
+        this.manufacturer = manufacturer.toUpperCase();
     }
 
     public String getModel() {
