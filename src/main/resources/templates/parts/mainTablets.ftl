@@ -1,5 +1,4 @@
 <#import "sectionTablets.ftl" as s>
-
 <#import "filters.ftl" as f>
 
 <main class="mb-0">

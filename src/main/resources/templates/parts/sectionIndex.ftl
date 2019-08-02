@@ -1,3 +1,5 @@
+<#include "security.ftl">
+
 <#macro sectionIndex>
     <section>
         <div class="row">
@@ -14,6 +16,7 @@
                                 <#--<a href="#" class="btn btn-primary">Add to cart</a>-->
                                 <form class="d-inline" action="addLaptopToCart" method="post">
                                     <button class="btn btn-primary" name="buttonAddLaptopToCart" value="${laptop.id}">Add to cart</button>
+                                    <#if know><input type="hidden" name="userId" value="${user.id}"></#if>
                                     <input type="hidden" name="_csrf" value="${_csrf.token}">
                                 </form>
                             </div>

@@ -3,7 +3,7 @@ package com.sivak.computershop.entities;
 import javax.persistence.*;
 
 @Entity
-public class Tablets {
+public class Tablets implements Products {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -13,28 +13,25 @@ public class Tablets {
     private int monitor;
     private String cpu;
     private int ram;
-    private boolean flashCard;
     private Integer storageSize;
-    private String videoCard;
+    private boolean flashCard;
     private String fileName;
     @Column(precision = 2)
     private double price;
 
-
     public Tablets() {
     }
 
-    public Tablets(String OSystem, String manufacturer, String model, int monitor, String cpu, int ram,
-                   boolean flashCard, Integer storageSize, String videoCard, double price) {
+    public Tablets(String OSystem, String manufacturer, String model, int monitor,
+                   String cpu, int ram,boolean flashCard, Integer storageSize, double price) {
         this.os = OSystem;
-        this.manufacturer = manufacturer;
+        this.manufacturer = manufacturer.toUpperCase();
         this.model = model;
         this.monitor = monitor;
         this.cpu = cpu;
         this.ram = ram;
-        this.flashCard = flashCard;
         this.storageSize = storageSize;
-        this.videoCard = videoCard;
+        this.flashCard = flashCard;
         this.price = price;
     }
 
@@ -110,14 +107,6 @@ public class Tablets {
         this.storageSize = storageSize;
     }
 
-    public String getVideoCard() {
-        return videoCard;
-    }
-
-    public void setVideoCard(String videoCard) {
-        this.videoCard = videoCard;
-    }
-
     public String getFileName() {
         return fileName;
     }
@@ -145,32 +134,29 @@ public class Tablets {
         if (ram != tablets.ram) return false;
         if (flashCard != tablets.flashCard) return false;
         if (Double.compare(tablets.price, price) != 0) return false;
-        if (id != null ? !id.equals(tablets.id) : tablets.id != null) return false;
-        if (os != null ? !os.equals(tablets.os) : tablets.os != null) return false;
-        if (manufacturer != null ? !manufacturer.equals(tablets.manufacturer) : tablets.manufacturer != null)
-            return false;
-        if (model != null ? !model.equals(tablets.model) : tablets.model != null) return false;
-        if (cpu != null ? !cpu.equals(tablets.cpu) : tablets.cpu != null) return false;
-        if (storageSize != null ? !storageSize.equals(tablets.storageSize) : tablets.storageSize != null) return false;
-        if (videoCard != null ? !videoCard.equals(tablets.videoCard) : tablets.videoCard != null) return false;
-        return fileName != null ? fileName.equals(tablets.fileName) : tablets.fileName == null;
+        if (!id.equals(tablets.id)) return false;
+        if (!os.equals(tablets.os)) return false;
+        if (!manufacturer.equals(tablets.manufacturer)) return false;
+        if (!model.equals(tablets.model)) return false;
+        if (!cpu.equals(tablets.cpu)) return false;
+        if (!storageSize.equals(tablets.storageSize)) return false;
+        return fileName.equals(tablets.fileName);
     }
 
     @Override
     public int hashCode() {
         int result;
         long temp;
-        result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (os != null ? os.hashCode() : 0);
-        result = 31 * result + (manufacturer != null ? manufacturer.hashCode() : 0);
-        result = 31 * result + (model != null ? model.hashCode() : 0);
+        result = id.hashCode();
+        result = 31 * result + os.hashCode();
+        result = 31 * result + manufacturer.hashCode();
+        result = 31 * result + model.hashCode();
         result = 31 * result + monitor;
-        result = 31 * result + (cpu != null ? cpu.hashCode() : 0);
+        result = 31 * result + cpu.hashCode();
         result = 31 * result + ram;
         result = 31 * result + (flashCard ? 1 : 0);
-        result = 31 * result + (storageSize != null ? storageSize.hashCode() : 0);
-        result = 31 * result + (videoCard != null ? videoCard.hashCode() : 0);
-        result = 31 * result + (fileName != null ? fileName.hashCode() : 0);
+        result = 31 * result + storageSize.hashCode();
+        result = 31 * result + fileName.hashCode();
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;

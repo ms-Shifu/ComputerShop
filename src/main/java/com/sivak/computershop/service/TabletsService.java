@@ -5,13 +5,9 @@ import com.sivak.computershop.repos.TabletsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,13 +20,12 @@ public class TabletsService {
     private String uploadPath;
 
     public List<Tablets> filter(List<String> os, List<Integer> monitor, String manufacturer, String cpu,
-                                List<Integer> ram, List<Boolean> flashCard, List<Integer> storageSize,
-                                List<String> videoCard, double price1, double price2) {
+                                List<Integer> ram, List<Boolean> flashCard, List<Integer> storageSize, double price1, double price2) {
 
         List<Tablets> tablets = new ArrayList<>();
 
         if (monitor != null || manufacturer != null || cpu != null || ram != null || flashCard != null ||
-                storageSize != null || videoCard != null || price1 != 0 || price2 != 0) {
+                storageSize != null || price1 != 0 || price2 != 0) {
 
 //---------OS
 
@@ -187,34 +182,6 @@ public class TabletsService {
                 }
             }
 
-//----------VIDEO_CARD
-
-            if (videoCard != null) {
-
-                if (tablets.isEmpty()) {
-                    for (String v : videoCard) {
-                        tablets.addAll(tabletsRepo.findByVideoCard(v));
-                    }
-
-                    if (tablets.isEmpty()) return tablets;
-                } else {
-
-                    List<Tablets> tabletsEmpty = new ArrayList<>();
-
-                    for (String v : videoCard) {
-                        tabletsEmpty.addAll(tablets.stream()
-                                .filter(l -> l.getVideoCard().equals(v))
-                                .collect(Collectors.toList()));
-                    }
-
-                    if (tabletsEmpty.isEmpty()) {
-                        return tabletsEmpty;
-                    } else {
-                        tablets = tabletsEmpty;
-                    }
-                }
-            }
-
 //----------PRICE
 
             if (price1 != 0 || price2 != 0) {
@@ -237,27 +204,9 @@ public class TabletsService {
         return tablets;
     }
 
-
-    public void saveTablet(Tablets tablet, MultipartFile file) throws IOException {
-
-        File uploadsFile = new File(uploadPath);
-
-        if (!uploadsFile.exists()) {
-            uploadsFile.mkdir();
-        }
-
-        String uuidName = UUID.randomUUID().toString();
-        String resultFileName = uuidName + "." + file.getOriginalFilename();
-        tablet.setFileName(resultFileName);
-
-        file.transferTo(new File(uploadPath + "/" + resultFileName));
-
-        tabletsRepo.save(tablet);
-    }
-
     public void tabletEditOrDelete(Tablets tablet, String buttonEdit, String os, String manufacturer,
                                    String model, int monitor, String cpu, int ram, boolean flashCard,
-                                   int storageSize, String videoCard, double price) {
+                                   int storageSize, double price) {
 
         if (buttonEdit.equals("edit")) {
 
@@ -269,7 +218,6 @@ public class TabletsService {
             tablet.setRam(ram);
             tablet.setFlashCard(flashCard);
             tablet.setStorageSize(storageSize);
-            tablet.setVideoCard(videoCard);
             tablet.setPrice(price);
 
             tabletsRepo.save(tablet);

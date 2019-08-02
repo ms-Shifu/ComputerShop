@@ -1,3 +1,5 @@
+<#include "security.ftl">
+
 <#macro sectionTablets>
     <section>
         <div class="row">
@@ -8,12 +10,13 @@
                         <div class="card-body  text-center">
                             <h5 class="card-title text-center">${tablet.manufacturer} ${tablet.model}</h5>
                             <p class="card-text text-center">${tablet.os}, ${tablet.monitor}", CPU: ${tablet.cpu}, RAM ${tablet.ram}Gb,
-                              flash memory: ${tablet.storageSize}Gb, flash card: ${tablet.flashCard?then("Yes", "No")},
-                                video adapter: ${tablet.videoCard}.</p>
+                              flash memory: ${tablet.storageSize}Gb,
+                                flash card: ${tablet.flashCard?then("Yes", "No")}.</p>
                             <div>
                                 <strong class="text-primary mr-4 align-middle">$${tablet.getPrice()?string["0.00"]}</strong>
                                 <form class="d-inline" action="addTabletToCart" method="post">
                                     <button class="btn btn-primary" name="buttonAddTabletToCart" value="${tablet.id}">Add to cart</button>
+                                    <#if know><input type="hidden" name="userId" value="${user.id}"></#if>
                                     <input type="hidden" name="_csrf" value="${_csrf.token}">
                                 </form>
                             </div>

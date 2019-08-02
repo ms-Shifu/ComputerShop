@@ -1,21 +1,15 @@
 package com.sivak.computershop.controllers;
 
-import com.sivak.computershop.entities.Laptops;
-import com.sivak.computershop.entities.Orders;
-import com.sivak.computershop.entities.Tablets;
-import com.sivak.computershop.entities.Users;
+import com.sivak.computershop.entities.*;
 import com.sivak.computershop.repos.OrdersRepo;
 import com.sivak.computershop.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 @Controller
 public class CartController {
@@ -27,60 +21,89 @@ public class CartController {
     private OrdersRepo ordersRepo;
 
     @GetMapping("/cart")
-    public String cart() {
+    public String cart(
+            @AuthenticationPrincipal Users userSession,
+            Model model
+    ) {
 
+        Users userFromDB = userRepo.findByUsername(userSession.getUsername());
+        model.addAttribute("laptops", userFromDB.getLaptops());
+        model.addAttribute("tablets", userFromDB.getTablets());
+        model.addAttribute("phones", userFromDB.getPhones());
+//        model.addAttribute("getInCart", userFromDB.getInCart());
 
         return "cart";
     }
 
     @PostMapping("/buy")
     public String buy(
-            @AuthenticationPrincipal Users user,
-            @RequestParam(value = "laptopId", required = false) List<Laptops> laptops,
-            @RequestParam(value = "tabletId", required = false) List<Tablets> tablets,
-            @RequestParam boolean isAddAll
-    ) {
+            @RequestParam(value = "username") String username,
+            @RequestParam(value = "laptopId", required = false) Laptops laptop,
+            @RequestParam(value = "tabletId", required = false) Tablets tablet,
+            @RequestParam(value = "phoneId", required = false) Phones phone,
+            @AuthenticationPrincipal Users userSession
 
-        if (isAddAll) {
-            laptops = user.getLaptops();
-            tablets = user.getTablets();
-        }
+//            @RequestParam(required = false, defaultValue = "false") boolean isAddAll
+    ) {
+//
+//        if (isAddAll) {
+//            laptops = user.getLaptops();
+//            tablets = user.getTablets();
+//            phones = user.getPhones();
+//        }
+
+        Users user = userRepo.findByUsername(username);
 
         Orders order = new Orders(user);
 
-        if (laptops != null) {
-            order.getLaptops().addAll(laptops);
+        if (laptop != null) {
+            order.getLaptops().add(laptop);
         }
 
-        if (tablets != null) {
-            order.getTablets().addAll(tablets);
+        if (tablet != null) {
+            order.getTablets().add(tablet);
         }
 
-        if (laptops != null || tablets != null) {
-            removeFromCart(user, laptops, tablets);
+        if (phone != null) {
+            order.getPhones().add(phone);
         }
+
+
+        if (laptop != null || tablet != null || phone != null) {
+            removeFromCart(username, laptop, tablet, phone, userSession);
+        }
+
 
         ordersRepo.save(order);
-        System.out.println(order);
 
         return "redirect:/cart";
     }
 
     @PostMapping("/removeFromCart")
     public String removeFromCart(
-            @AuthenticationPrincipal Users user,
-            @RequestParam(value = "removeLaptop", required = false) List<Laptops> laptops,
-            @RequestParam(value = "removeTablet", required = false)  List<Tablets> tablets
-    ) {
+            @RequestParam("username") String username,
+            @RequestParam(value = "laptopId", required = false) Laptops laptop,
+            @RequestParam(value = "tabletId", required = false) Tablets tablet,
+            @RequestParam(value = "phoneId", required = false) Phones phone,
+            @AuthenticationPrincipal Users userSession
 
-        if (laptops != null) {
-            List<Laptops> laptopsList = user.getLaptops();
-            laptopsList.removeAll(laptops);
+            ) {
+
+        Users user = userRepo.findByUsername(username);
+
+        if (laptop != null) {
+            user.getLaptops().remove(laptop);
+            userSession.getLaptops().remove(laptop);
         }
 
-        if (tablets != null) {
-            List<Tablets> tabletsList = user.getTablets();
-            tabletsList.removeAll(tablets);
+        if (tablet != null) {
+            user.getTablets().remove(tablet);
+            userSession.getTablets().remove(tablet);
+        }
+
+        if (phone != null) {
+            user.getPhones().remove(phone);
+            userSession.getPhones().remove(phone);
         }
 
         userRepo.save(user);
@@ -88,5 +111,28 @@ public class CartController {
         return "redirect:/cart";
     }
 
+    @PostMapping("/buyAll")
+    public String buyAll(@RequestParam("username") String username,
+                         @AuthenticationPrincipal Users userSession) {
 
+        Users user = userRepo.findByUsername(username);
+
+        Orders order = new Orders(user);
+
+        order.getLaptops().addAll(user.getLaptops());
+        user.getLaptops().clear();
+        userSession.getLaptops().clear();
+
+        order.getTablets().addAll(user.getTablets());
+        user.getTablets().clear();
+        userSession.getTablets().clear();
+
+        order.getPhones().addAll(user.getPhones());
+        user.getPhones().clear();
+        userSession.getPhones().clear();
+
+        userRepo.save(user);
+
+        return "redirect:/cart";
+    }
 }

@@ -22,7 +22,5 @@ public interface TabletsRepo extends JpaRepository<Tablets, Long> {
 
     List<Tablets> findByStorageSize(Integer storageSize);
 
-    List<Tablets> findByVideoCard(String videoCard);
-
     List<Tablets> findByPriceBetween(double price1, double price2);
 }

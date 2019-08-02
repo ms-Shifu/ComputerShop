@@ -3,15 +3,10 @@ package com.sivak.computershop.service;
 import com.sivak.computershop.entities.Laptops;
 import com.sivak.computershop.repos.LaptopsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,8 +15,7 @@ public class LaptopsService {
     @Autowired
     private LaptopsRepo laptopsRepo;
 
-    @Value("${upload.path}")
-    private String uploadPath;
+
 
     public List<Laptops> filter(List<Integer> monitor, String manufacturer, String cpu, List<Integer> ram,
                                 List<String> storageType, List<Integer> storageSize, List<String> videoCard,
@@ -208,26 +202,10 @@ public class LaptopsService {
     }
 
 
-    public void saveLaptop(Laptops laptop, MultipartFile file) throws IOException {
-
-        File uploadsFile = new File(uploadPath);
-
-        if (!uploadsFile.exists()) {
-            uploadsFile.mkdir();
-        }
-
-        String uuidName = UUID.randomUUID().toString();
-        String resultFileName = uuidName + "." + file.getOriginalFilename();
-        laptop.setFileName(resultFileName);
-
-        file.transferTo(new File(uploadPath + "/" + resultFileName));
-
-        laptopsRepo.save(laptop);
-    }
-
-    public void laptopEditOrDelete(Laptops laptop, String buttonEdit, String manufacturer, String model,
-                                   int monitor, String cpu, int ram, String storageType, int storageSize,
-                                   String videoCard, double price) {
+    public void laptopEditOrDelete(Laptops laptop, String buttonEdit, String manufacturer,
+                                   String model, int monitor, String cpu, int ram,
+                                   String storageType, int storageSize, String videoCard,
+                                   double price) {
 
         if (buttonEdit.equals("edit")) {
 

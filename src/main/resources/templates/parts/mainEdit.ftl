@@ -3,7 +3,7 @@
         <#--ADD FORM-->
 
         <div class="mb-4">
-            <h4 class="text-secondary mb-4">Add new laptop</h4>
+            <h4 class="text-secondary mb-4">Add new Laptop</h4>
 
             <a class="btn btn-primary" data-toggle="collapse" href="#collapseAddNewLaptop" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Press to open
@@ -62,6 +62,7 @@
                 </form>
             </div>
         </div>
+
 
 
         <#--EDIT AND DELITE FORM-->
@@ -139,7 +140,7 @@
                     <div class="form-row ml-auto">
                         <div class="col-auto">
                             <button type="submit" name="buttonEdit" value="edit" class="btn btn-primary mb-2">Edit</button>
-                            <button type="submit" name="buttonEdit" value="delete" class="btn btn-primary mb-2">Delete</button>
+                            <button type="submit" name="buttonEdit" value="delete" class="btn btn-danger mb-2">Delete</button>
                         </div>
                     </div>
 

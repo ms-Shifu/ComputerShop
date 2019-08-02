@@ -26,12 +26,16 @@ public class Users implements UserDetails {
     private Set<Roles> roles;
 
     @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "laptops_id")
     private List<Laptops> laptops;
 
     @OrderColumn
     @ManyToMany(fetch = FetchType.EAGER)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private List<Tablets> tablets;
+
+    @OrderColumn(name = "orderphone_id")
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Phones> phones;
 
     public Users() {
     }
@@ -101,12 +105,8 @@ public class Users implements UserDetails {
     }
 
     public int getInCart() {
-        return laptops.size() + tablets.size();
+        return laptops.size() + tablets.size() + phones.size();
     }
-
-//    public void setInCart(int inCart) {
-//        this.inCart = inCart;
-//    }
 
     public Set<Roles> getRoles() {
         return roles;
@@ -150,5 +150,47 @@ public class Users implements UserDetails {
 
     public void setTablets(List<Tablets> tablets) {
         this.tablets = tablets;
+    }
+
+    public List<Phones> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(List<Phones> phones) {
+        this.phones = phones;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Users users = (Users) o;
+
+        if (active != users.active) return false;
+        if (id != null ? !id.equals(users.id) : users.id != null) return false;
+        if (username != null ? !username.equals(users.username) : users.username != null) return false;
+        if (password != null ? !password.equals(users.password) : users.password != null) return false;
+        if (address != null ? !address.equals(users.address) : users.address != null) return false;
+        if (phoneNumber != null ? !phoneNumber.equals(users.phoneNumber) : users.phoneNumber != null) return false;
+        if (roles != null ? !roles.equals(users.roles) : users.roles != null) return false;
+        if (laptops != null ? !laptops.equals(users.laptops) : users.laptops != null) return false;
+        if (tablets != null ? !tablets.equals(users.tablets) : users.tablets != null) return false;
+        return phones != null ? phones.equals(users.phones) : users.phones == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (active ? 1 : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        result = 31 * result + (roles != null ? roles.hashCode() : 0);
+        result = 31 * result + (laptops != null ? laptops.hashCode() : 0);
+        result = 31 * result + (tablets != null ? tablets.hashCode() : 0);
+        result = 31 * result + (phones != null ? phones.hashCode() : 0);
+        return result;
     }
 }

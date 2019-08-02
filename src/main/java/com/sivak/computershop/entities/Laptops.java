@@ -3,7 +3,7 @@ package com.sivak.computershop.entities;
 import javax.persistence.*;
 
 @Entity
-public class Laptops {
+public class Laptops implements Products {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -26,7 +26,7 @@ public class Laptops {
     public Laptops(String manufacturer, String model, int monitor, String cpu, int ram,
                    String storageType, Integer storageSize, String videoCard,
                    double price) {
-        this.manufacturer = manufacturer;
+        this.manufacturer = manufacturer.toUpperCase();
         this.model = model;
         this.monitor = monitor;
         this.cpu = cpu;
@@ -122,7 +122,7 @@ public class Laptops {
     }
 
 //    @Type(type="double")
-    public Double getPrice() {
+    public double getPrice() {
 //        return  this.price == null ? .0 : price;
         return price;
     }

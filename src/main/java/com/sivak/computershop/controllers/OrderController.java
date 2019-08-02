@@ -1,10 +1,10 @@
 package com.sivak.computershop.controllers;
 
 import com.sivak.computershop.entities.Orders;
-import com.sivak.computershop.entities.Users;
+import com.sivak.computershop.entities.OrdersCompleted;
+import com.sivak.computershop.repos.OrdersCompletedRepo;
 import com.sivak.computershop.repos.OrdersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +19,8 @@ public class OrderController {
    @Autowired
    private OrdersRepo ordersRepo;
 
+   @Autowired
+   private OrdersCompletedRepo ordersCompletedRepo;
 
 
     @GetMapping("/orders")
@@ -27,32 +29,22 @@ public class OrderController {
         List<Orders> orders = ordersRepo.findAll();
 
         model.addAttribute("orders", orders);
-
-        System.out.println(orders);
+        model.addAttribute("activeOrders", "active");
 
         return "orders";
     }
 
 
-    @PostMapping("/orders")
-    public String buyOrders(
-            @AuthenticationPrincipal Users users,
-            @RequestParam Long buyProduct,
-            @RequestParam Class typeOdClass,
-            Model model
+    @PostMapping("/ordersCompleted")
+    public String ordersCompleted(
+            @RequestParam("orderId") Orders order
     ) {
 
+        OrdersCompleted orderCompleted = new OrdersCompleted(order.getId(), order.getUser(), order.getLaptops(), order.getTablets(), order.getPhones());
 
+        ordersCompletedRepo.save(orderCompleted);
 
-//        if (buyProduct instanceof Laptops) {
-//            Optional<Laptops> laptops = laptopsRepo.findById(((Laptops)buyProduct).getId());
-//            model.addAttribute("laptops", laptops);
-//        }
-
-
-//
-////        Laptops laptops = (Laptops) buyProduct;
-//////        Laptops laptops2 = product;
+        ordersRepo.delete(order);
 
         return "redirect:/orders";
     }
