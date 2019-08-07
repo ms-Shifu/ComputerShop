@@ -30,14 +30,19 @@
 
             <ul class="navbar-nav">
                 <li class="nav-item ">
-                    <form action="/" method="get">
+
+                    <#if activeLaptops??>
+                        <#assign path = "/" />
+                    <#elseif activeTablets??>
+                        <#assign path = "/tablets" />
+                    <#elseif activePhones??>
+                        <#assign path = "/phones" />
+                    </#if>
+
+                    <form action="${path}" method="get">
                         <div class="form-group my-auto">
-                        <#--<label for="inputState">State</label>-->
-                            <select class="form-control" name="sortByPrice">
-                                <option selected disabled>Sort</option>
-                                <option value="true">Price ASC</option>
-                                <option value="false">Price DESC</option>
-                            </select>
+                            <button type="submit" class="btn btn-light btn-sm btn-block font-weight-bold text-secondary" name="sortByPrice" value="true">Price asc</button>
+                            <button type="submit" class="btn btn-light btn-sm btn-block     font-weight-bold text-secondary" name="sortByPrice" value="false">Price desc</button>
                         </div>
                     </form>
                 </li>

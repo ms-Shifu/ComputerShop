@@ -1,7 +1,10 @@
 package com.sivak.computershop.controllers;
 
+import com.sivak.computershop.entities.Products;
 import com.sivak.computershop.entities.Tablets;
 import com.sivak.computershop.entities.Users;
+import com.sivak.computershop.entities.comparators.ProductPriceAscComparator;
+import com.sivak.computershop.entities.comparators.ProductsPriceDescComparator;
 import com.sivak.computershop.repos.TabletsRepo;
 import com.sivak.computershop.repos.UserRepo;
 import com.sivak.computershop.service.ProductsService;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -47,11 +51,22 @@ public class TabletsController {
             @RequestParam(required = false) List<Integer> storageSize,
             @RequestParam(required = false, defaultValue = "0.01") double price1,
             @RequestParam(required = false, defaultValue = "99999.99") double price2,
+            @RequestParam(defaultValue = "true") boolean sortByPrice,
             Model model) {
 
 
         List<Tablets> tablets = tabletsService.filter(os, monitor, manufacturer, cpu, ram, flashCard,
                 storageSize, price1, price2);
+
+        Comparator<Products> pcomp;
+
+        if (sortByPrice) {
+            pcomp = new ProductPriceAscComparator();
+        } else {
+            pcomp = new ProductsPriceDescComparator();
+        }
+
+        tablets.sort(pcomp);
 
         model.addAttribute("classType", "tablets");
         model.addAttribute("tablets", tablets);

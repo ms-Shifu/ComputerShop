@@ -2,7 +2,10 @@ package com.sivak.computershop.controllers;
 
 
 import com.sivak.computershop.entities.Phones;
+import com.sivak.computershop.entities.Products;
 import com.sivak.computershop.entities.Users;
+import com.sivak.computershop.entities.comparators.ProductPriceAscComparator;
+import com.sivak.computershop.entities.comparators.ProductsPriceDescComparator;
 import com.sivak.computershop.repos.PhonesRepo;
 import com.sivak.computershop.repos.UserRepo;
 import com.sivak.computershop.service.PhonesService;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -47,9 +51,20 @@ public class PhonesController {
             @RequestParam(required = false) List<Boolean> flashCard,
             @RequestParam(required = false, defaultValue = "0.01") double price1,
             @RequestParam(required = false, defaultValue = "99999.99") double price2,
+            @RequestParam(defaultValue = "true") boolean sortByPrice,
             Model model) {
 
         List<Phones> phones = phonesService.filter(dualSim, monitor, manufacturer, cpu, ram, flashCard, storageSize, price1, price2);
+
+        Comparator<Products> pcomp;
+
+        if (sortByPrice) {
+            pcomp = new ProductPriceAscComparator();
+        } else {
+            pcomp = new ProductsPriceDescComparator();
+        }
+
+        phones.sort(pcomp);
 
         model.addAttribute("classType", "phones");
         model.addAttribute("phones", phones);

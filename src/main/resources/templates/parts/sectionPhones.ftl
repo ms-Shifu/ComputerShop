@@ -13,14 +13,14 @@
                                 RAM ${phone.ram}Gb, flash memory: ${phone.storageSize}Gb,
                                 dual SIM: ${phone.dualSim?then("Yes", "No")},
                                 flash card: ${phone.flashCard?then("Yes", "No")}.</p>
-                            <div>
-                                <strong class="text-primary mr-2 align-middle">$${phone.getPrice()?string["0.00"]}</strong>
-                                <form class="d-inline" action="/addPhoneToCart" method="post">
-                                    <button class="btn btn-primary" name="buttonAddPhoneToCart" value="${phone.id}">Add to cart</button>
+                        </div>
+                        <div class="mx-auto" style="margin-bottom: 10px;">
+                            <strong class="text-primary mr-2 align-middle">$${phone.getPrice()?string["0.00"]}</strong>
+                            <form class="d-inline" action="/addPhoneToCart" method="post">
+                                <button class="btn btn-primary" name="buttonAddPhoneToCart" value="${phone.id}">Add to cart</button>
                                     <#if know><input type="hidden" name="userId" value="${user.id}"></#if>
-                                    <input type="hidden" name="_csrf" value="${_csrf.token}">
-                                </form>
-                            </div>
+                                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                            </form>
                         </div>
                     </div>
                 </div>

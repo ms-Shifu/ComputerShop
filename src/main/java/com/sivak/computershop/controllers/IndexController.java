@@ -50,7 +50,7 @@ public class IndexController {
             @RequestParam(required = false) List<String> videoCard,
             @RequestParam(required = false, defaultValue = "0.01") double price1,
             @RequestParam(required = false, defaultValue = "99999.99") double price2,
-            @RequestParam(defaultValue = "true") boolean sortByRpice,
+            @RequestParam(defaultValue = "true") boolean sortByPrice,
             Model model) {
 
 
@@ -59,7 +59,7 @@ public class IndexController {
 
         Comparator<Products> pcomp;
 
-        if (sortByRpice) {
+        if (sortByPrice) {
             pcomp = new ProductPriceAscComparator();
         } else {
             pcomp = new ProductsPriceDescComparator();

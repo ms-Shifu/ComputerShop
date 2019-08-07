@@ -13,13 +13,13 @@
     <#--SIDEBAR-->
 
         <div class="row">
-            <div class="col-4 border-right">
+            <div class="col-3 border-right">
                 <@f.filters "/phones" />
             </div>
 
     <#--SECTION-->
 
-            <div class="col-8">
+            <div class="col-9">
                 <@s.sectionPhones />
             </div>
         </div>

@@ -51,8 +51,7 @@
             },
             function() {
                 $(this).css('opacity', '1');
-            })
-
+            });
 </script>
 
 </body>
