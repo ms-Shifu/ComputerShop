@@ -30,7 +30,7 @@ public class UserService implements UserDetailsService {
         return userRepo.findByUsername(username);
     }
 
-    public boolean matchPasswords(String password1, String password2) {
+    public boolean  matchPasswords(String password1, String password2) {
         return password1.equals(password2);
     }
 
