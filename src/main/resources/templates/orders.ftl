@@ -18,6 +18,7 @@
             <th scope="col">Address</th>
             <th scope="col">Products</th>
             <th scope="col">Total, $</th>
+            <th scope="col">Payed</th>
             <th scope="col"></th>
         </tr>
         </thead>
@@ -66,6 +67,8 @@
 
             </td>
             <th class="align-middle">${laptopPrice + tabletPrice + phonePrice}</th>
+            <th class="text-center align-middle"><input type="checkbox"
+           ${order.payed?then("checked", "")} disabled> </th>
             <td>
                 <form action="/ordersCompleted" method="post" class="d-inline">
                     <button class="btn btn-success" name="orderId" value="${order.id}" >Completed</button>

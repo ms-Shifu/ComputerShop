@@ -113,7 +113,10 @@ public class CartController {
 
     @PostMapping("/buyAll")
     public String buyAll(@RequestParam("username") String username,
-                         @AuthenticationPrincipal Users userSession) {
+                         @RequestParam(required = false) String paymentMethod,
+                         @RequestParam(required = false) String  totalPrice,
+                         @AuthenticationPrincipal Users userSession,
+                         Model model) {
 
         Users user = userRepo.findByUsername(username);
 
@@ -131,7 +134,15 @@ public class CartController {
         user.getPhones().clear();
         userSession.getPhones().clear();
 
-        userRepo.save(user);
+        ordersRepo.save(order);
+    
+        Double totalPriceDouble = Double.valueOf(totalPrice);
+    
+        if (paymentMethod.equals("payOnline")) {
+            model.addAttribute("totalPrice", totalPriceDouble);
+            model.addAttribute("orderId", order.getId());
+            return "payment";
+        }
 
         return "redirect:/cart";
     }

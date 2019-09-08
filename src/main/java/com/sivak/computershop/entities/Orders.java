@@ -1,6 +1,7 @@
 package com.sivak.computershop.entities;
 
 import javax.persistence.*;
+import javax.validation.valueextraction.UnwrapByDefault;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,8 @@ public class Orders {
     @OrderColumn
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Phones> phones;
+    
+    private Boolean payed;
 
     public Orders() {
     }
@@ -36,6 +39,7 @@ public class Orders {
         this.laptops = new ArrayList<>();
         this.tablets = new ArrayList<>();
         this.phones = new ArrayList<>();
+        this.payed = false;
     }
 
     public Long getId() {
@@ -85,7 +89,15 @@ public class Orders {
     public void setPhones(List<Phones> phones) {
         this.phones = phones;
     }
-
+    
+    public Boolean getPayed() {
+        return payed;
+    }
+    
+    public void setPayed(Boolean payed) {
+        this.payed = payed;
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -3,7 +3,7 @@
 <@c.page>
     <main class="container">
 
-        <h4 class="text-secondary text-center mb-4">List of Orders</h4>
+        <h4 class="text-secondary text-center mb-4">List of Completed orders</h4>
 
 
         <table class="table table-striped">

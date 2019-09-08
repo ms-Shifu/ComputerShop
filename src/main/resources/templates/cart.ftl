@@ -159,18 +159,45 @@
 
         <hr class="my-3"/>
 
-    <#if user.getInCart() gt 1 >
-    <div class="d-flex justify-content-end align-items-center">
-        <p class="h5">Total sum: $${laptopPrice + tabletPrice + phonePrice}</p>
+    <#if user.getInCart() gt 0 >
+    <div class="row">
+        <div class="col-9 ">
+            <p class="h5 text-right">Total sum: $${laptopPrice + tabletPrice + phonePrice}</p>
+        </div>
 
-        <form action="/buyAll" method="post" class=" ml-3">
-            <button class="btn btn-primary" name="username"
-                    value="${user.username}" style="width: 83px;">Buy All</button>
-            <input type="hidden" name="_csrf" value="${_csrf.token}">
-        </form>
+
+        <div class="col-3">
+            <form action="/buyAll" method="post" class="ml-3">
+                <div class="form-row">
+                    <div class="col-6">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio1" name="paymentMethod" value="payCash" class="custom-control-input" checked>
+                            <label class="custom-control-label" for="customRadio1">Pay cash</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio2" name="paymentMethod" value="payOnline" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadio2">Pay online</label>
+                        </div>
+                    </div>
+
+
+                    <div class="col-6">
+                        <button class="btn btn-primary" name="username"
+                                value="${user.username}" style="width: 83px;">Buy <#if user.getInCart() gt 1 >All</#if></button>
+                    </div>
+                </div>
+
+
+
+
+                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                <input type="hidden" name="totalPrice" value="${(laptopPrice + tabletPrice + phonePrice)?c}" data-type="number">
+            </form>
+        </div>
     </div>
-
     </#if>
+
+
 
     <#if user.getInCart() == 0>
          <div class="container">
