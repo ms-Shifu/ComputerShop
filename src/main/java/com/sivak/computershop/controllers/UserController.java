@@ -40,6 +40,11 @@ public class UserController {
             model.addAttribute("message", "Passwords don't match");
             return "registration";
         }
+    
+        if (!userService.matchMails(email)) {
+            model.addAttribute("message", "This mail address already registered");
+            return "registration";
+        }
 
         if (!userService.addNewUser(username, password1, email, address, phoneNumber)) {
             model.addAttribute("message", "A user already exists");

@@ -5,11 +5,17 @@
     <div class="container">
         <div class="row">
 
-            <div class="mx-auto my-3">
-                <h4>Contacts</h4>
+
+            <div class="text-center w-100 ">
+                <h2 class="text-secondary">Contacts</h2>
             </div>
 
-            <#--<h4 class="mx-auto d-block">Contacts</h4>-->
+            <div class="mx-auto my-5">
+                <img src="img/24_7_2.png" alt="Working time" width="225">
+            </div>
+
+
+        <#--<h4 class="mx-auto d-block">Contacts</h4>-->
 
 
             <table class="table">
@@ -24,7 +30,7 @@
                 <tr>
                     <td>MTC (33), file :) (25), Velcom (29) 555-66-77</td>
                     <td><a href="https://mail.google.com/mail/u/1/#inbox">computershop@gmail.com</a> </td>
-                    <td>РБ, Минск, пр-т Независимости 2-3, 2 этаж, павельон 4</td>
+                    <td>BY, Minsk, Nezavisimosti ave. 2-3, 2nd floor, pavilion 4</td>
                 </tr>
                 </tbody>
             </table>

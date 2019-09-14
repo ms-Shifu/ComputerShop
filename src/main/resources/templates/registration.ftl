@@ -6,7 +6,12 @@
 
         <p class="h4 mb-4 text-center text-secondary">Sign Up</p>
 
-        <p class="h5 mb-4 text-center text-danger">${message!''}</p>
+        <#if message??>
+             <div class="alert alert-danger col-9 mx-auto mb-4" role="alert">
+                 <p class="h5  text-center">${message}</p>
+             </div>
+        </#if>
+
 
         <div class="form-group">
             <label for="inputUsername" style="padding-left: 127px;">Username</label>

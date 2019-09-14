@@ -35,10 +35,12 @@ public class UserService implements UserDetailsService {
         
         return user;
     }
+    
 
     public boolean  matchPasswords(String password1, String password2) {
         return password1.equals(password2);
     }
+    
 
     public boolean addNewUser(String username, String password1, String email, String address, String phoneNumber) {
 
@@ -100,5 +102,13 @@ public class UserService implements UserDetailsService {
         }
     
         return true;
+    }
+    
+    public boolean matchMails(String email) {
+        Users userRepoByEmail = userRepo.findByEmail(email);
+    
+        System.out.println(userRepoByEmail);
+    
+        return (userRepoByEmail == null);
     }
 }

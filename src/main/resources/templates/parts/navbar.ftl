@@ -1,6 +1,6 @@
 <#include "security.ftl">
 
-<nav class="navbar navbar-expand-sm navbar-light bg-light sticky-top mb-5">
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top mb-5">
     <strong><a class="navbar-brand text-primary" href="/"><span style="font-size: 1.5rem;"><span class="text-danger">C</span>omputer<span class="text-danger">S</span>hop</span></a></strong>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -13,6 +13,9 @@
             </li>
             <li class="nav-item ${activeContacts!""}">
                 <a class="nav-link" href="/contacts">Contacts</a>
+            </li>
+            <li class="nav-item ${activeDelivery!""}">
+                <a class="nav-link" href="/delivery">Delivery</a>
             </li>
             <#if isAdmin>
                  <li class="nav-item ${activeOrders!""}">
