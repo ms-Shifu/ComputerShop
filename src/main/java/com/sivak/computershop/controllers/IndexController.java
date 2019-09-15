@@ -48,8 +48,8 @@ public class IndexController {
             @RequestParam(required = false) List<String> storageType,
             @RequestParam(required = false) List<Integer> storageSize,
             @RequestParam(required = false) List<String> videoCard,
-            @RequestParam(required = false, defaultValue = "0.01") double price1,
-            @RequestParam(required = false, defaultValue = "99999.99") double price2,
+            @RequestParam(required = false, defaultValue = "0") Double price1,
+            @RequestParam(required = false, defaultValue = "0") Double price2,
             @RequestParam(defaultValue = "true") boolean sortByPrice,
             Model model) {
 
@@ -73,9 +73,12 @@ public class IndexController {
         model.addAttribute("activeLaptops", "active");
         model.addAttribute("activeCatalog", "active");
 
+        ControllerUtils.addCheckedLaptopsToViewLayer(
+                monitor, manufacturer, cpu, ram, storageType, storageSize, videoCard, price1, price2, model
+        );
+
         return "index";
     }
-
 
     @GetMapping("/laptopsEdit")
     public String laptopEdit(Model model) {
@@ -99,7 +102,7 @@ public class IndexController {
                             @RequestParam int storageSize,
                             @RequestParam String videoCard,
                             @RequestParam double price,
-                            @RequestParam("file")MultipartFile file) throws IOException {
+                            @RequestParam("file") MultipartFile file) throws IOException {
 
         Laptops laptop = new Laptops(manufacturer, model, monitor, cpu, ram, storageType,
                 storageSize, videoCard, price);
@@ -135,7 +138,6 @@ public class IndexController {
 
         return "redirect:/";
     }
-
 
 
     @PostMapping("/addLaptopToCart")

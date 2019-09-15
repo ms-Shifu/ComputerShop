@@ -33,7 +33,7 @@
         <ul class="navbar-nav mr-5">
             <li class="nav-item">
                 <a class="nav-link inCartLink" href="/cart">
-                    <img src="/img/Cart-1-512.png" width="25" height="25" class="d-inline-block align-top"  alt="cart">
+                    <img src="/img/Cart-1-512.png" width="25" height="25" class="d-inline-block align-top"  alt="cart" />
                     <h5 class="d-inline">
                         <span class="badge badge-danger">
                         <#if know> ${user.getInCart()} <#else>0</#if>

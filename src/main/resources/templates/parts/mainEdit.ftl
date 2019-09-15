@@ -14,7 +14,7 @@
                 <form method="post" action="/laptopsEditAdd" enctype="multipart/form-data" autocomplete="on">
                     <div class="form-group">
                     <#--<label for="input1">Manufacturer</label>-->
-                        <input type="text" name="manufacturer" class="form-control" id="input1" placeholder="Enter Manufacturer" required maxlength="50">
+                        <input type="text" name="manufacturer" class="form-control" id="input1" placeholder="Enter Manufacturer" required maxlength="50"/>
                     </div>
                     <div class="form-group">
                     <#--<label for="input2">Model</label>-->
@@ -67,7 +67,7 @@
 
         <#--EDIT AND DELITE FORM-->
 
-        <div class="my-5">
+        <div class="my-5" id="laptopsEdit-list">
             <h4 class="text-secondary ">Settings</h4>
             <table class="mt-4 table">
                 <thead>

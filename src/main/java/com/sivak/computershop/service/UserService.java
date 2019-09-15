@@ -10,6 +10,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 
 import java.util.Collections;
 import java.util.UUID;
@@ -37,20 +40,29 @@ public class UserService implements UserDetailsService {
     }
     
 
-    public boolean  matchPasswords(String password1, String password2) {
-        return password1.equals(password2);
+    public void matchPasswords(String password1, String password2, BindingResult bindingResult) {
+        if (StringUtils.isEmpty(password2)) {
+            ObjectError password2ObjectError = new FieldError("users","password2", "Confirm password can't be empty");
+            bindingResult.addError(password2ObjectError);
+            return;
+        }
+
+        if (!password1.equals(password2)) {
+            ObjectError password2ObjectError = new FieldError("users", "password2", "Passwords aren't equals");
+            bindingResult.addError(password2ObjectError);
+            return;
+        }
     }
     
 
-    public boolean addNewUser(String username, String password1, String email, String address, String phoneNumber) {
+    public boolean addNewUser(Users user) {
 
-        Users userFromDB = userRepo.findByUsername(username);
+        Users userFromDB = userRepo.findByUsername(user.getUsername());
 
         if (userFromDB != null) {
             return false;
         }
 
-        Users user = new Users(username, password1, email, address, phoneNumber);
         user.setActive(false);
         user.setRoles(Collections.singleton(Roles.USER));
         user.setActivationCode(UUID.randomUUID().toString());
@@ -106,8 +118,6 @@ public class UserService implements UserDetailsService {
     
     public boolean matchMails(String email) {
         Users userRepoByEmail = userRepo.findByEmail(email);
-    
-        System.out.println(userRepoByEmail);
     
         return (userRepoByEmail == null);
     }

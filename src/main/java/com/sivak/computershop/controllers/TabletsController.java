@@ -49,8 +49,8 @@ public class TabletsController {
             @RequestParam(required = false) List<Integer> ram,
             @RequestParam(required = false) List<Boolean> flashCard,
             @RequestParam(required = false) List<Integer> storageSize,
-            @RequestParam(required = false, defaultValue = "0.01") double price1,
-            @RequestParam(required = false, defaultValue = "99999.99") double price2,
+            @RequestParam(required = false, defaultValue = "0") Double price1,
+            @RequestParam(required = false, defaultValue = "0") Double price2,
             @RequestParam(defaultValue = "true") boolean sortByPrice,
             Model model) {
 
@@ -74,9 +74,12 @@ public class TabletsController {
         model.addAttribute("activeTablets", "active");
         model.addAttribute("activeCatalog", "active");
 
+        ControllerUtils.addCheckedTabletsToViewLayer(
+                os, monitor, manufacturer, cpu, ram, flashCard, storageSize, price1, price2, model
+        );
+
         return "tablets";
     }
-
 
     @GetMapping("/tabletsEdit")
     public String tabletEdit(Model model) {
