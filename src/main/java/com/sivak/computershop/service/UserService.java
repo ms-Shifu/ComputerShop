@@ -42,15 +42,14 @@ public class UserService implements UserDetailsService {
     }
     
 
-    public boolean addNewUser(String username, String password1, String email, String address, String phoneNumber) {
+    public boolean addNewUser(Users user) {
 
-        Users userFromDB = userRepo.findByUsername(username);
+        Users userFromDB = userRepo.findByUsername(user.getUsername());
 
         if (userFromDB != null) {
             return false;
         }
 
-        Users user = new Users(username, password1, email, address, phoneNumber);
         user.setActive(false);
         user.setRoles(Collections.singleton(Roles.USER));
         user.setActivationCode(UUID.randomUUID().toString());
@@ -106,8 +105,6 @@ public class UserService implements UserDetailsService {
     
     public boolean matchMails(String email) {
         Users userRepoByEmail = userRepo.findByEmail(email);
-    
-        System.out.println(userRepoByEmail);
     
         return (userRepoByEmail == null);
     }

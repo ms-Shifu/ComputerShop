@@ -7,7 +7,8 @@ create table laptops (
     manufacturer varchar(255),
     model varchar(255),
     monitor int4 not null,
-    price float8, ram int4 not null,
+    price float8,
+    ram int4 not null,
     storage_size int4,
     storage_type varchar(255),
     video_card varchar(255),
@@ -16,7 +17,8 @@ create table laptops (
 
 create table orders (
     id int8 not null,
-    date date, payed boolean,
+    date date,
+    payed boolean,
     user_id int8,
     primary key (id)
 );

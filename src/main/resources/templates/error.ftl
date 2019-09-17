@@ -2,6 +2,6 @@
 
 <@c.page>
     <main class="container">
-        <p class="h5">Something went wrong. <br>Please try again later.</p>
+        <p class="h5">Something went wrong. <br/>Please try again later.</p>
     </main>
 </@c.page>

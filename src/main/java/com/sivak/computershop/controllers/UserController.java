@@ -35,6 +35,8 @@ public class UserController {
             @RequestParam String address,
             @RequestParam String phoneNumber,
             Model model) {
+    
+        Users user = new Users(username, password1, email, address, phoneNumber);
 
         if (!userService.matchPasswords(password1, password2)) {
             model.addAttribute("message", "Passwords don't match");
@@ -46,7 +48,7 @@ public class UserController {
             return "registration";
         }
 
-        if (!userService.addNewUser(username, password1, email, address, phoneNumber)) {
+        if (!userService.addNewUser(user)) {
             model.addAttribute("message", "A user already exists");
             return "registration";
         }
