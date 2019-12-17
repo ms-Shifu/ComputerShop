@@ -1,10 +1,12 @@
 package com.sivak.computershop.entities;
 
-import org.hibernate.annotations.Cascade;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -15,11 +17,21 @@ public class Users implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank(message = "Username can't be empty")
+    @Length(max = 255, message = "Username too long (max size <= 255)")
     private String username;
+    @NotBlank(message = "Password can't be empty")
     private String password;
     private boolean active;
+    @NotBlank(message = "Address can't be empty")
+    @Length(max = 255, message = "Address too long (max size <= 255)")
     private String address;
+    @NotBlank(message = "Phone number can't be empty")
+    @Length(max = 24, message = "Phone number too long (max size <= 16)")
     private String phoneNumber;
+    @Email
+    @NotBlank(message = "Email can't be empty")
+    @Length(max = 255, message = "Email too long (max size <= 255)")
     private String email;
     private String activationCode;
 

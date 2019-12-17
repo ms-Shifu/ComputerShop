@@ -49,8 +49,8 @@ public class PhonesController {
             @RequestParam(required = false) List<Integer> ram,
             @RequestParam(required = false) List<Integer> storageSize,
             @RequestParam(required = false) List<Boolean> flashCard,
-            @RequestParam(required = false, defaultValue = "0.01") double price1,
-            @RequestParam(required = false, defaultValue = "99999.99") double price2,
+            @RequestParam(required = false, defaultValue = "0") Double price1,
+            @RequestParam(required = false, defaultValue = "0") Double price2,
             @RequestParam(defaultValue = "true") boolean sortByPrice,
             Model model) {
 
@@ -71,6 +71,10 @@ public class PhonesController {
 
         model.addAttribute("activePhones", "active");
         model.addAttribute("activeCatalog", "active");
+
+        ControllerUtils.addCheckedPhonesToViewLayer(
+                dualSim, manufacturer, monitor, cpu, ram, storageSize, flashCard, price1, price2, model
+        );
 
         return "phones";
     }

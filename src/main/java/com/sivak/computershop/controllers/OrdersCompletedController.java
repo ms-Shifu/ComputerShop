@@ -22,8 +22,7 @@ public class OrdersCompletedController {
         model.addAttribute("ordersCompleted", ordersCompleted);
 
         model.addAttribute("activeOrdersCompleted", "active");
-
-
+        
         return "ordersCompleted";
     }
 }

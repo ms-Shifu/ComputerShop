@@ -2,6 +2,6 @@
 
 <@c.page>
     <main class="container">
-        <p>${message}</p>
+        <p>${message!''}</p>
     </main>
 </@c.page>
