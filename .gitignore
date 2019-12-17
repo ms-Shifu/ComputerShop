@@ -18,6 +18,6 @@ buildNumber.properties
 *.iml
 out
 gen
-*.properties
+/resources/*.properties
 *.sql
-#
+###
