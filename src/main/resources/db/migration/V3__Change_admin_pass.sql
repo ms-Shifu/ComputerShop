@@ -1,3 +1,3 @@
 update usr
-    set password = 'viper51072C'
+    set password = ''
     where id = 3;
